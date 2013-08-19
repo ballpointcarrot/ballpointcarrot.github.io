@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[blog.ballpointcarrot.net]]></title>
-  <link href="http://ballpointcarrot.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Metablog | blog.ballpointcarrot.net]]></title>
+  <link href="http://ballpointcarrot.github.io/blog/categories/metablog/atom.xml" rel="self"/>
   <link href="http://ballpointcarrot.github.io/"/>
   <updated>2013-08-19T11:51:48-07:00</updated>
   <id>http://ballpointcarrot.github.io/</id>
