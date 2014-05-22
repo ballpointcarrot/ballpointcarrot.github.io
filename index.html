@@ -1,314 +1,71 @@
+
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>blog.ballpointcarrot.net</title>
+  <title>ballpointcarrot.net</title>
   <meta name="author" content="Christopher Kruse">
 
-
-  <meta name="description" content="Background I often fall back to my (now well-worn) copy of The Pragmatic Programmer to take a look at things I can do to hone my abilities as a &hellip;">
-
+  
+  <meta name="description" content="Hi Everyone! I&#8217;m a web developer who spends most of his days tinkering around with resources in AWS. Feel free to look around, see what I&#8217 &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+  
   <link rel="canonical" href="http://ballpointcarrot.github.io">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="blog.ballpointcarrot.net" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="ballpointcarrot.net" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-
+  
 
 </head>
 
-<body   >
+<body class="no-sidebar">
   <header role="banner"><hgroup>
-  <h1><a href="/">blog.ballpointcarrot.net</a></h1>
-
-    <h2>Musings.</h2>
-
 </hgroup>
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-
+  
 </ul>
-
+  
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:ballpointcarrot.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
+  <li><a href="/">Ballpointcarrot.net</a></li>
+  <li><a href="/blog">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="https://plus.google.com/photos/103562630555047820490/albums">Photos</a></li>
 </ul>
 
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-
-
-
-    <article>
-
-  <header>
-
-      <h1 class="entry-title"><a href="/blog/2014/02/07/learning-a-new-editor/">Learning a New Editor</a></h1>
-
-
-      <p class="meta">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-02-07T22:03:00-08:00" pubdate data-updated="true">Feb 7<span>th</span>, 2014</time>
-
-      </p>
-
-  </header>
-
-
-  <div class="entry-content"><h2>Background</h2>
-
-<p>I often fall back to my (now well-worn) copy of <a href="http://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer</a> to take a look at things I can do to hone my abilities as a programmer. Recently, the two rules that have most recently hit me as things I haven&rsquo;t put much focus on are <em>Invest Regularly in Your Knowledge Portfolio</em>, and <em>There Are No Final Decisions</em>. In a fit of Christmas downime enegry, I decided to incorporate these principles by taking myself out of my normal comfort zone, and cutting out one of my most widely used tools &ndash; vim.</p>
-
-<p>I&rsquo;ve been a vimmer for many years, and I&rsquo;ve incorporated utilities passed down from greater minds than I (Tim Pope, the guys at Pivotal, etc.) and had become comfortable in how I used my text editor day-to-day. I had a nice workflow set up, utilizing multiple vim tabs and separate sessions within tmux windows, and life was pretty good.</p>
-
-<p>Then, in December, the challenge was set: strip vim out of my workflow for good, and find something else.</p>
-
-<p>Naturally, and guided by one of my coworkers, I managed to settle on what is generally considered to be the prime competitor to vim &ndash; Emacs.</p>
-
-<h2>Baby Steps</h2>
-
-<p>I&rsquo;ve had forays into learning Emacs before, but I&rsquo;ve always shied away, after playing with some basic tooling, and forgetting how to close it more often than I care to admit. This time was different, though; I had more years of experience under my belt, and it was more about getting myself into an uncomfortable place before I gain more knowledge.</p>
-
-<p>My first thought was to find some type of starting guide. While the Emacs tutorial helped in terms of understanding navigation and simple editing, it didn&rsquo;t really show me the true power of the environment that I had gained. A cursory google search brought me to the <a href="https://github.com/technomancy/emacs-starter-kit">Emacs Starter Kit</a>. This toolkit provides some default setting to get you started with the environment; I used the documentation around it to gain knowledge of things like Melpa and Marmalade, which act as Emacs Package Managers of sorts.</p>
-
-<p>Following my initial setup with the starter kit, I started delving into the <a href="http://www.emacswiki.org/emacs/">emacs wiki</a>. This became a much more handy resource to me, as it provided me with multiple provided solutions to given issues that I&rsquo;ve encountered while converting my vim-based mind to a constantly-insert-enabled editor. When I&rsquo;d run into an issue where I found something I&rsquo;d like to do similar to vim, I&rsquo;d head to the wiki to find what analogs are available. Once I&rsquo;d find a package which did what I looked for, I&rsquo;d test it out with an M-x pacakge-install, and incorporate it into my init.el when I felt I had it down.</p>
-
-<h4>Evil?</h4>
-
-<p>I had been asked while converting why I decided not to use a vi-like editor package for Emacs (like Evil or Viper). I felt that, if I were to do this, it would be skimping out on what I should be learning, and I&rsquo;d get less of an understanding of Emacs because I was sticking to my old method of doing things. Thus, I opted for Emacs&rsquo;s standard of editing, and no vi-emulation modes.</p>
-
-<h2>Post-move</h2>
-
-<p>These are the things that I&rsquo;ve discovered in the two months since I switched:</p>
-
-<ul>
-<li>Split pane support. I actually like the way that Emacs splits its windows better than vim. A C-x 2 or C-x 3 is an easy way to remember it; coupled with the &lsquo;workgroups2&rsquo; package, configurations can be stored across sessions, too.</li>
-<li>Lisp. This has been a slow one for me, but I&rsquo;m becoming more interested in learning Lisp and Lisp-like languages, like Clojure. I have a lot of work to do here, and that will be something to work on in the future.</li>
-<li>Tramp. Being able to edit files across an SSH tunnel is a fantastic feature.</li>
-<li>Buffers without files. Since the editor is meant to live on indefinitely, it&rsquo;s nice to spin up a new buffer and set the mode(s) I want, and let it reside in memory for a while before saving it. If I need to, a save is close enough away, but it works wonders for when I need to take some quick notes.</li>
-<li>ERC. I no longer need a separate IRC cilent; Emacs handles it for me. This is fantastic for me at work, where we frequently use chat to talk around.</li>
-</ul>
-
-
-<p>Things I wish I had from Vim:</p>
-
-<ul>
-<li>Sentence-like movement. I&rsquo;ve sort of rebuilt this on my own with a combination of line-jumps (M-x goto-line) and ace-jump-mode, but being able to translate &ldquo;^3wci(&rdquo; into what it can do in Vim is a skill I have yet to master.</li>
-<li>Mixing modes in HTML. This was noticeably less of a problem in Vim, but I don&rsquo;t know if it was due to the editor or my lack of noticing that showed just how difficult it is to switch contexts from HTML/CSS/JS all in the same file. I&rsquo;ve tried doing the nXML hack and multiple modes, but those have worked to no avail.</li>
-<li>Closing the editor. True, I can leave Emacs. But, I miss popping up a new window for one file, and then leaving right after a quick edit.</li>
-<li>Workspace management. Because of the way I separated files into tabs in Vim, I knew each tab matched a different section of what I was working on (or another project entirely).  I lack this with the way that buffers are managed by default in Emacs. I&rsquo;m still looking for better ways of handling this management, though &ndash; workgroups2 has been a nice start.</li>
-</ul>
-
-
-<p>Things I know I still have yet to learn:</p>
-
-<ul>
-<li>More Lisp. I&rsquo;ve gotten a good start, but that&rsquo;s a deep rabbit hole.</li>
-<li>Shell, email within Emacs. I used to use a lot of separate tools &ndash; now that Emacs contains most of them, I&rsquo;d like to get better at handling those tasks within Emacs.</li>
-<li>Org-mode. I&rsquo;ve seen my coworker pull off some crazy things with scheduling and notes within Org-mode, and I&rsquo;d love to get to the point where I can do them, too.</li>
-<li>Macros and scripting. My next Pragmatic tenet is <em>Write Code That Writes Code</em>; I think getting your editor set to facilitate your programming counts. :)</li>
-</ul>
-
-
-<p>We&rsquo;ll see what the next few months hold.</p>
-</div>
-
-
-
-
-    </article>
-
-
-    <article>
-
-  <header>
-
-      <h1 class="entry-title"><a href="/blog/2013/08/19/well/">Well, I Should&#8217;ve Been Paying Attention.</a></h1>
-
-
-      <p class="meta">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-08-19T11:42:00-07:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
-
-      </p>
-
-  </header>
-
-
-  <div class="entry-content"><p>So, I guess on 30 April 2013, Posterous Spaces was shuttered. You should see <a href="http://www.posterous.com">what&rsquo;s there now</a>.</p>
-
-<p>Then, a full three months later, someone tells me that ballpointcarrot.net isn&rsquo;t functioning.
-I figure, &ldquo;I can check it when I find some time. It&rsquo;s been busy.&rdquo;</p>
-
-<p>Cue almost a <em>month</em> after that, and I find that Posterous is gone (as is the content on the old blog).
-Now, I&rsquo;m working to rebuild and reset different platforms/ideas that can both provide me CNAME linking
-to <a href="http://blog.ballpointcarrot.net">blog.ballpointcarrot.net</a>, and I ran across Github Pages and Octopress.
-I&rsquo;m gonna give it a try for a while, and see what happens.</p>
-
-<p>Meanwhile, the main ballpointcarrot site has to go through a redesign, as the automatic feed parsing thing has
-broken enough times that it&rsquo;s time to replace it. Expect a new look (but the same old logo) sometime when I find
-some more time again &ndash; so November, maybe. :S</p>
-</div>
-
-
-
-
-    </article>
-
-  <div class="pagination">
-
-    <a href="/blog/archives">Blog Archives</a>
+  <div id="home-content">
+    <h3>Hi Everyone!</h3>
+<hr class="styled" />
+<p>I&#8217;m a web developer who spends most of his days tinkering around with resources in AWS. Feel free to look around, see what I&#8217;m up to in the <a href="/blog">blog</a>, check out my <a href="https://github.com/ballpointcarrot">github</a>, or otherwise <a href="mailto:ckruse@ballpointcarrot.net">connect with me</a>.</p>
 
   </div>
-</div>
-<aside class="sidebar">
-
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-
-      <li class="post">
-        <a href="/blog/2014/02/07/learning-a-new-editor/">Learning a New Editor</a>
-      </li>
-
-      <li class="post">
-        <a href="/blog/2013/08/19/well/">Well, I Should&#8217;ve Been Paying Attention.</a>
-      </li>
-
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-
-  <a href="https://github.com/ballpointcarrot">@ballpointcarrot</a> on GitHub
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'ballpointcarrot',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/103562630555047820490?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Christopher Kruse -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
 </body>
-</html>

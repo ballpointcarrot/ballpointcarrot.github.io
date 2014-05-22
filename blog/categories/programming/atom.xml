@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Programming | blog.ballpointcarrot.net]]></title>
+  <title><![CDATA[Category: Programming | ballpointcarrot.net]]></title>
   <link href="http://ballpointcarrot.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://ballpointcarrot.github.io/"/>
-  <updated>2014-02-08T10:40:52-08:00</updated>
+  <updated>2014-05-21T22:26:56-07:00</updated>
   <id>http://ballpointcarrot.github.io/</id>
   <author>
     <name><![CDATA[Christopher Kruse]]></name>
-    
+    <email><![CDATA[ckruse@ballpointcarrot.net]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
