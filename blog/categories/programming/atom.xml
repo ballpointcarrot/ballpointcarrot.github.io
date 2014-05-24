@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Programming | ballpointcarrot.net]]></title>
-  <link href="http://ballpointcarrot.github.io/blog/categories/programming/atom.xml" rel="self"/>
-  <link href="http://ballpointcarrot.github.io/"/>
-  <updated>2014-05-21T22:26:56-07:00</updated>
-  <id>http://ballpointcarrot.github.io/</id>
+  <link href="http://www.ballpointcarrot.net/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://www.ballpointcarrot.net/"/>
+  <updated>2014-05-23T22:55:54-07:00</updated>
+  <id>http://www.ballpointcarrot.net/</id>
   <author>
     <name><![CDATA[Christopher Kruse]]></name>
     <email><![CDATA[ckruse@ballpointcarrot.net]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning a new Editor]]></title>
-    <link href="http://ballpointcarrot.github.io/blog/2014/02/07/learning-a-new-editor/"/>
+    <link href="http://www.ballpointcarrot.net/blog/2014/02/07/learning-a-new-editor/"/>
     <updated>2014-02-07T22:03:00-08:00</updated>
-    <id>http://ballpointcarrot.github.io/blog/2014/02/07/learning-a-new-editor</id>
+    <id>http://www.ballpointcarrot.net/blog/2014/02/07/learning-a-new-editor</id>
     <content type="html"><![CDATA[<h2>Background</h2>
 
 <p>I often fall back to my (now well-worn) copy of <a href="http://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer</a> to take a look at things I can do to hone my abilities as a programmer. Recently, the two rules that have most recently hit me as things I haven&rsquo;t put much focus on are <em>Invest Regularly in Your Knowledge Portfolio</em>, and <em>There Are No Final Decisions</em>. In a fit of Christmas downime enegry, I decided to incorporate these principles by taking myself out of my normal comfort zone, and cutting out one of my most widely used tools &ndash; vim.</p>

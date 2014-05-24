@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://ballpointcarrot.github.io/sitemap.xml 
+Sitemap: http://www.ballpointcarrot.net/sitemap.xml 

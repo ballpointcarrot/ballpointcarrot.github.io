@@ -1,35 +1,39 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://ballpointcarrot.github.io/blog/2013/08/19/well/</loc>
+        <loc>http://www.ballpointcarrot.net/blog/2013/08/19/well/</loc>
         <lastmod>2014-05-21T22:22:06-07:00</lastmod>
     </url>
     <url>
-        <loc>http://ballpointcarrot.github.io/blog/2014/02/07/learning-a-new-editor/</loc>
+        <loc>http://www.ballpointcarrot.net/blog/2014/02/07/learning-a-new-editor/</loc>
         <lastmod>2014-05-21T22:22:06-07:00</lastmod>
     </url>
     <url>
-        <loc>http://ballpointcarrot.github.io/blog/2014/05/21/redesign-and-goals/</loc>
+        <loc>http://www.ballpointcarrot.net/blog/2014/05/21/redesign-and-goals/</loc>
         <lastmod>2014-05-21T22:22:06-07:00</lastmod>
     </url>
     <url>
-        <loc>http://ballpointcarrot.github.io/blog/archives/</loc>
+        <loc>http://www.ballpointcarrot.net/blog/2014/05/23/tooling-around/</loc>
+        <lastmod>2014-05-23T22:55:16-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.ballpointcarrot.net/blog/archives/</loc>
+        <lastmod>2014-05-23T22:55:16-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.ballpointcarrot.net/blog/</loc>
+        <lastmod>2014-05-23T22:55:16-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.ballpointcarrot.net/robots.txt</loc>
         <lastmod>2014-05-21T22:22:06-07:00</lastmod>
     </url>
     <url>
-        <loc>http://ballpointcarrot.github.io/blog/</loc>
-        <lastmod>2014-05-21T22:22:06-07:00</lastmod>
+        <loc>http://www.ballpointcarrot.net/archives/</loc>
+        <lastmod>2014-05-23T22:55:16-07:00</lastmod>
     </url>
     <url>
-        <loc>http://ballpointcarrot.github.io/robots.txt</loc>
-        <lastmod>2014-05-21T22:22:06-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://ballpointcarrot.github.io/archives/</loc>
-        <lastmod>2014-05-21T22:22:06-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://ballpointcarrot.github.io/</loc>
-        <lastmod>2014-05-21T22:22:06-07:00</lastmod>
+        <loc>http://www.ballpointcarrot.net/</loc>
+        <lastmod>2014-05-23T22:55:16-07:00</lastmod>
     </url>
 </urlset>

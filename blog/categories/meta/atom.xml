@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: meta, | ballpointcarrot.net]]></title>
-  <link href="http://ballpointcarrot.github.io/blog/categories/meta/atom.xml" rel="self"/>
-  <link href="http://ballpointcarrot.github.io/"/>
-  <updated>2014-05-21T22:26:56-07:00</updated>
-  <id>http://ballpointcarrot.github.io/</id>
+  <link href="http://www.ballpointcarrot.net/blog/categories/meta/atom.xml" rel="self"/>
+  <link href="http://www.ballpointcarrot.net/"/>
+  <updated>2014-05-23T22:55:54-07:00</updated>
+  <id>http://www.ballpointcarrot.net/</id>
   <author>
     <name><![CDATA[Christopher Kruse]]></name>
     <email><![CDATA[ckruse@ballpointcarrot.net]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Redesign, and Goals]]></title>
-    <link href="http://ballpointcarrot.github.io/blog/2014/05/21/redesign-and-goals/"/>
+    <link href="http://www.ballpointcarrot.net/blog/2014/05/21/redesign-and-goals/"/>
     <updated>2014-05-21T21:45:00-07:00</updated>
-    <id>http://ballpointcarrot.github.io/blog/2014/05/21/redesign-and-goals</id>
+    <id>http://www.ballpointcarrot.net/blog/2014/05/21/redesign-and-goals</id>
     <content type="html"><![CDATA[<h2>New Site Layout!</h2>
 
 <p>Hey everyone! After taking time to look through and see what it would take to maintain the old ballpointcarrot.net site (residing on a mostly-dormant 1-dyno Heroku install), I&rsquo;ve decided to forgo it and run everything on Octopress. Let me know if you have positives/negatives to say about the changes. I feel it&rsquo;s a positive step, and it&rsquo;s one less account to keep open for me. Bonus.</p>

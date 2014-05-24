@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Metablog | ballpointcarrot.net]]></title>
-  <link href="http://ballpointcarrot.github.io/blog/categories/metablog/atom.xml" rel="self"/>
-  <link href="http://ballpointcarrot.github.io/"/>
-  <updated>2014-05-21T22:26:56-07:00</updated>
-  <id>http://ballpointcarrot.github.io/</id>
+  <link href="http://www.ballpointcarrot.net/blog/categories/metablog/atom.xml" rel="self"/>
+  <link href="http://www.ballpointcarrot.net/"/>
+  <updated>2014-05-23T22:55:54-07:00</updated>
+  <id>http://www.ballpointcarrot.net/</id>
   <author>
     <name><![CDATA[Christopher Kruse]]></name>
     <email><![CDATA[ckruse@ballpointcarrot.net]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Well, I should've been paying attention.]]></title>
-    <link href="http://ballpointcarrot.github.io/blog/2013/08/19/well/"/>
+    <link href="http://www.ballpointcarrot.net/blog/2013/08/19/well/"/>
     <updated>2013-08-19T11:42:00-07:00</updated>
-    <id>http://ballpointcarrot.github.io/blog/2013/08/19/well</id>
+    <id>http://www.ballpointcarrot.net/blog/2013/08/19/well</id>
     <content type="html"><![CDATA[<p>So, I guess on 30 April 2013, Posterous Spaces was shuttered. You should see <a href="http://www.posterous.com">what&rsquo;s there now</a>.</p>
 
 <p>Then, a full three months later, someone tells me that ballpointcarrot.net isn&rsquo;t functioning.
