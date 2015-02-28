@@ -1,5 +1,5 @@
 <!-- The big featured header on the homepage, with the site logo and description  -->
-<header class="site-head" <% if (blog.cover) { %>style="background-image: url(<%= blog.cover %>)"<% } %>>
+<header class="site-head" <% if (blog.cover) { %>style="background-image: linear-gradient(rgba(133, 85, 61, 0.7), rgba(133, 85, 61, 0.7)), url(<%= blog.cover %>)"<% } %>>
     <div class="vertical">
         <div class="site-head-content inner">
             <% if (blog.logo) { %><a class="blog-logo" href="<%= blog.url %>"><img src="<%= blog.logo %>" alt="Blog Logo" /></a><% } %>

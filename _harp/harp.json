@@ -5,7 +5,7 @@
       "domain": "ballpointcarrot.net",
       "description": "Orange, and goes 'click, click.'",
       "logo": false,
-      "cover": true,
+      "cover": "/assets/img/hero-blurred.jpg",
       "url": "/"
     },
     "author": {
