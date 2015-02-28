@@ -1,0 +1,18 @@
+{
+  "globals": {
+    "blog": {
+      "title": "Ballpointcarrot.net",
+      "domain": "ballpointcarrot.net",
+      "description": "Orange, and goes 'click, click.'",
+      "logo": false,
+      "cover": true,
+      "url": "/"
+    },
+    "author": {
+      "name": "Christopher Kruse",
+      "email": "ckruse@ballpointcarrot.net",
+      "bio": "AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns."
+    }
+  },
+  "domains": []
+}

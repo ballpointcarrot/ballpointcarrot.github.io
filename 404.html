@@ -22,49 +22,31 @@
     <!-- Ghost outputs important style and meta data with this tag -->
     <!-- {{ghost_head}} -->
 </head>
-<body class="home-template"><!-- K: body_class variable, home page class is home-template, post is like: post-template tag-getting-started -->
+<body class="post-template"><!-- K: body_class variable, home page class is home-template, post is like: post-template tag-getting-started -->
 
     <!-- Everything else gets inserted here -->
     
-        <!-- The big featured header on the homepage, with the site logo and description  -->
-<header class="site-head" style="background-image: url(true)">
-    <div class="vertical">
-        <div class="site-head-content inner">
-            
-            <h1 class="blog-title">Ballpointcarrot.net</h1>
-            <h2 class="blog-description">Orange, and goes &#39;click, click.&#39;</h2>
-        </div>
-    </div>
+        <main class="content" role="main">
+
+    <article class="post"><!-- page? -->
+        <!-- Each post has the blog logo at the top, with a link back to the home page -->
+<header class="post-header">
+    <a class="blog-logo" href="/">
+        
+            <span class="blog-title">Ballpointcarrot.net</span>
+        
+    </a>
 </header>
 
-<!-- The main content area on the homepage  -->
-<main class="content" role="main">
-    <!-- Each post will be output using this markup  -->
-    
-    
+        <!-- Everything below outputs content of the the page which has been published -->
+        
+          <h1>404 Not Found</h1>
+        
 
-    <article class="post"><!-- K: also needs class tag- for each tag -->
-        <header class="post-header">
-            <span class="post-meta"><time datetime="Fri, 10 Jan 2014 08:00:00 GMT">10 Jan 2014</time> on Getting Started<!-- {{tags prefix="on "}}--></span>
-            <h2 class="post-title"><a href="welcome-to-harp">Welcome to Harp</a></h2>
-
-        </header>
-        <section class="post-excerpt">
-            <p>This little posts will introduce you to Markdown in Harp. Go ahead and edit the welcome-to-harp.md file to get going and learn how it all works!
-Getting StartedWriting in Markdown is really easy. Where appropriate, you can use formatting shortcuts to style your content. For example, a list:
-
-Item number one
-Item number&hellip;</p><!-- K: Exerpt isn’t cuttoff exactly the same yet, needs to be plaintext -->
-        </section>
     </article>
 
-
-    
-
-    <!--! After all the posts, we have the previous/next pagination links  -->
-    <!-- {{pagination}} -->
-
 </main>
+
     
 
     <footer class="site-footer">
