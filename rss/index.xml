@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ballpointcarrot.net</title>
+    <link>/</link>
+    <description>Orange, and goes 'click, click.'</description>
+    <atom:link href="posts/well-i-shouldve-been/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>Yearly Refresh Time!</title>
+        <description><![CDATA[<p>I don&#39;t know if it&#39;s the digital form of spring cleaning, or if there&#39;s a standing need to clean things up
+and keep them looking nicely, but I found it time this weekend to update the visual and functional aspects
+of my blog. With that being said, welcome to ballpointcarrot.net, version...4, I think?  I haven&#39;t done a 
+terribly good job of keeping an active archive, and haven&#39;t consulted the Internet Archive to see if they
+have any of the previous iterations.</p>
+<p>With the new layout comes a new backend engine for producing the contents - I&#39;ve moved from Octopress 
+(which, while nice, dictated a structure and tooling a little more than necessary) to a Node.js static 
+site generator called <a href="http://harpjs.com/">Harp</a>. </p>
+<p>Because this is a site generator first, the structure used for blog-like things, such as tags, feeds, etc.
+come as extras; It took a little bit of searching to find a theme and pattern I liked, and still didn&#39;t 
+fit 100%. Fortunately, because of the flexibility provided, I adjusted the structure of how data was read
+and inserted, and made it truly my own.</p>
+<h2>About the new platform</h2><p>As I mentioned, the base of the new platform is Harp. The <a href="https://github.com/kennethormandy/hb-casper">base theme</a> 
+is a port of <a href="https://github.com/TryGhost/Casper">Casper</a>, which is the default theme for the 
+<a href="https://ghost.org/">Ghost</a> blogging platform. In addition, I&#39;ve added a more flexible syntax 
+highlighting library called <a href="http://prismjs.com/">Prism</a> to help with code snippets (which I&#39;ll be able 
+to use more frequently, I&#39;m hoping!). </p>
+<pre><code class="language-javascript">christopher.blog_upgrade = true;
+</code></pre>
+<p>Overall, the site is still set to run on GitHub Pages; I appreciate
+that they allow hosting like that, and moreover, allow the Hostname redirection that they do.</p>
+<p>Migration of the actual data from the old platform to the new one worked pretty well. As they say, the 
+best knowledge transfer medium is plain text. No reading from databases, no conversions; just a little bit
+of modification of the markdown files in one platform to the other.</p>
+<h2>Now the question - <em>will he keep updating it?</em></h2><p>That will remain to be seen. I had a goal of writing every two days; we saw how well that went. But, I&#39;ve
+been working on teaching myself new things in the intervening time, and I think it may prove to be good 
+not just for me, but for people reading, to start putting my thoughts to paper, so to speak.</p>
+<p>I&#39;m cautiously optimistic that I can do a better job of updating things. We&#39;ll see if I can make a pattern
+out of it.</p>
+]]></description>
+        <pubDate>Sat Feb 28 2015 21:21:36 GMT-0800 (PST)</pubDate>
+        <link>/posts/yearly-refresh-time</link>
+        <guid isPermaLink="true">/posts/yearly-refresh-time</guid>
+      </item>
+    
+    
+      <item>
+        <title>Tooling Around</title>
+        <description><![CDATA[<p>So, I traded in my work laptop today to replace it with a new one. I&#39;m glad I made the switch, as there were things that
+I didn&#39;t need on the old one, and I didn&#39;t want to have to mess with a major upgrade path and the inevitable breaks that
+were to come with it. Additionally, my workflow and suite of tools works better with the new hardware (I&#39;ve switched to
+an Ubuntu laptop from an OSX one), and it will centralize my daily work (email and communication, scheduling and
+planning) around the laptop instead of the desktop, which can then be devoted to other tasks (like running development
+projects).</p>
+<p>Because of the switch, it got me to thinking about the tooling that I use on a daily basis, and how to most smoothly
+move into getting that installed on a new system. Replacing hardware is tough work for a developer/engineer, and that
+would be time otherwise spent working on problems or creating new things. I&#39;m going to provide a rundown of my toolchain
+and how I orchestrate the installation of the tools.</p>
+<p>Note that, as this is tied to Linux, the tools will obviously be Linux-based. There are different flows for other OSs;
+each ecosystem operates differently. This is my solution for myself; YMMV.</p>
+<h2>Communication</h2><p>Being able to send and receive messages is key. Ten minutes after receiving my laptop today, I had a meeting that I had
+to run to, and to send an email containing some details to one of the attendees. I run my email from the office Exchange server to my desktop (and now the laptop) using
+<a href="http://fetchmail.berlios.de/">fetchmail</a> and <a href="http://www.procmail.org/">procmail</a>. While these may seem esoteric, and
+not terribly user-friendly, it gives me a strength that no other email client has - I can run scripts around my
+email. Procmail handles the filtering of the incoming fetchmail setup, and separates the email into the various folders
+for easy filtering rules (based on sender, topic in subject, etc.). Emails sent specifically to me in the To: header get
+a bit more prevalence, and emails with calendar invites as attachments get the attachment parsed and sent to a
+calendar. Since everything was using a standard Maildir format for storage on the laptop, migrating the email was as
+easy as running rsync between the two systems.</p>
+<p>This covers only the receipt of email, not sending. Since December (referencing
+<a href="http://www.ballpointcarrot.net/blog/2014/02/07/learning-a-new-editor/">an earlier post</a>), I&#39;ve been using Emacs to do
+more and more things - this has grown to include IRC chat (via the <a href="http://www.emacswiki.org/wiki/ERC">ERC</a> plugin) and
+email (using a pair of utilities called <a href="http://www.djcbsoftware.nl/code/mu/mu4e.html">mu and mu4e</a>). While normally I&#39;d
+entertain jokes here (like &quot;emacs is a good OS, it just needs a decent text editor.&quot;), I have to say that it&#39;s handy to
+have a single place to go for all the work you need to do. mu is external to Emacs, and is a search engine over your
+Maildir folders; you can use it on the command line to pick out emails that pertain to certain topics, and filter them
+by specific recipients and whether they&#39;re new/flagged/unread/etc. Mu4e wraps that logic in an easy to use mail client
+from within Emacs, and it&#39;s been much nicer than sifting through Outlook.</p>
+<h2>Environment</h2><p>So I&#39;ve got some software... now I have to customize what I run it in. Rather than stay with Unity (the default Ubuntu
+installed WM, which I frankly feel is counter-intuitive), I choose to go to a lesser known window manager called
+<a href="http://awesome.naquadah.org/">&quot;Awesome.&quot;</a> Appropriately named, as I haven&#39;t left it since I found it. By using a tiling
+window manager, I don&#39;t have to worry about resizing things to fit. Additionally, the entire interface is programmable
+via Lua, so defining custom shortcut keys and startup programs is fairly simple:</p>
+<pre><code class="language-lua">    -- ...
+    -- Hotkeys for handling window resizing and management:
+    clientkeys = awful.util.table.join(
+    awful.key({ modkey,           }, &quot;f&quot;,      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, &quot;q&quot;,      function (c) c:kill()                         end),
+    awful.key({ modkey, &quot;Control&quot; }, &quot;space&quot;,  awful.client.floating.toggle                     ),
+    awful.key({ modkey, &quot;Control&quot; }, &quot;Return&quot;, function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey,           }, &quot;o&quot;,      awful.client.movetoscreen                        ),
+    awful.key({ modkey, &quot;Shift&quot;   }, &quot;r&quot;,      function (c) c:redraw()                       end),
+    awful.key({ modkey,           }, &quot;t&quot;,      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, &quot;n&quot;,
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can&#39;t have the focus.
+            c.minimized = true
+        end),
+    awful.key({ modkey,           }, &quot;m&quot;,
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+        end)
+    )
+    -- Autostarts
+    awful.util.spawn_with_shell(&quot;/usr/bin/startup-script.sh&quot;)
+    awful.util.spawn_with_shell(&quot;~/bin/runme&quot;)
+</code></pre>
+<p>Awesome&#39;s libraries have amusing names: &quot;awful&quot;, &quot;naughty&quot;, and &quot;vicious&quot;, to name a few. Currently, I have this
+attached to the GNOME session layer, so I get the benefit of GNOME&#39;s background and icon management, but the window
+management of awesome.</p>
+<h2>Code</h2><p>A programmer can&#39;t do much unless he has languages to write in. For me, that means having to add some additional
+packages:</p>
+<ul>
+<li><p><a href="https://github.com/sstephenson/rbenv">rbenv</a> - this manages various installations of Ruby and the ecosystem around
+ it. Similar to RVM, this uses shim binaries to point to rotating Ruby versions, so that I can use one version with
+ one app, and use a legacy version to work on an older one.</p>
+</li>
+<li><p><a href="https://github.com/creationix/nvm">nvm</a> - Same idea as rbenv, but for node.js. These libraries give me the
+ flexibility of using different runtimes for different applications, and makes it easier to install the languages than
+ with the system-provided binaries (which can either be out of date or harder to manage).</p>
+</li>
+<li><p>I&#39;ve already mentioned it, but Emacs is in here, too. Being able to easily see language and typographical issues with
+ flycheck, syntax highlighting for languages available via <a href="https://github.com/dimitri/el-get">el-get</a>, and being able
+ to launch a simple shell within the editor to run a test is a blessing to getting things done.</p>
+</li>
+</ul>
+<h2>Tomorrow</h2><p>This was just for the first day, too. Things like browser plugins (which we use a myriad of for work) will likely come
+soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know
+if you have any questions on any of this, and I&#39;ll do what I can to answer them.</p>
+]]></description>
+        <pubDate>Sat Feb 28 2015 21:21:36 GMT-0800 (PST)</pubDate>
+        <link>/posts/tooling-around</link>
+        <guid isPermaLink="true">/posts/tooling-around</guid>
+      </item>
+    
+    
+      <item>
+        <title>Redesign, and Goals</title>
+        <description><![CDATA[<h2>New Site Layout!</h2><p>Hey everyone! After taking time to look through and see what it would take to maintain the old ballpointcarrot.net site (residing on a mostly-dormant 1-dyno Heroku install), I&#39;ve decided to forgo it and run everything on Octopress. Let me know if you have positives/negatives to say about the changes. I feel it&#39;s a positive step, and it&#39;s one less account to keep open for me. Bonus.</p>
+<h2>Goals</h2><p>I realize I don&#39;t post much on here, so I want to set a goal for myself for new blog posts. So, starting today, until the end of June, I&#39;ll strive to make a post every 2 days. You should expect to see something Friday. This will allow me to get some of my mind dumped out to the Internet, and expose my thinking to approaches for software. It will also give me time to put down things I&#39;ve learned while working at AWS - expect a lot of the posts to be covering issues with CloudFormation, Elastic Beanstalk, Auto Scaling and more. Plus, I&#39;ll probably have some talk on new JS frameworks, Docker, Ruby gotchas, and anything else I can think of.</p>
+<p>I still should be pretty reachable via the site - the sidebar for posts has my G+, Twitter and email nearby to click on. I&#39;ve also added Disqus comments below, so let me know what you think of the new layout, and my future content.</p>
+]]></description>
+        <pubDate>Sat Feb 28 2015 21:21:36 GMT-0800 (PST)</pubDate>
+        <link>/posts/redesign-and-goals</link>
+        <guid isPermaLink="true">/posts/redesign-and-goals</guid>
+      </item>
+    
+    
+      <item>
+        <title>Learning a new Editor</title>
+        <description><![CDATA[<h2>Background</h2><p>I often fall back to my (now well-worn) copy of <a href="http://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer</a> to take a look at things I can do to hone my abilities as a programmer. Recently, the two rules that have most recently hit me as things I haven&#39;t put much focus on are <em>Invest Regularly in Your Knowledge Portfolio</em>, and <em>There Are No Final Decisions</em>. In a fit of Christmas downime enegry, I decided to incorporate these principles by taking myself out of my normal comfort zone, and cutting out one of my most widely used tools - vim.</p>
+<p>I&#39;ve been a vimmer for many years, and I&#39;ve incorporated utilities passed down from greater minds than I (Tim Pope, the guys at Pivotal, etc.) and had become comfortable in how I used my text editor day-to-day. I had a nice workflow set up, utilizing multiple vim tabs and separate sessions within tmux windows, and life was pretty good.</p>
+<p>Then, in December, the challenge was set: strip vim out of my workflow for good, and find something else.</p>
+<p>Naturally, and guided by one of my coworkers, I managed to settle on what is generally considered to be the prime competitor to vim - Emacs.</p>
+<h2>Baby Steps</h2><p>I&#39;ve had forays into learning Emacs before, but I&#39;ve always shied away, after playing with some basic tooling, and forgetting how to close it more often than I care to admit. This time was different, though; I had more years of experience under my belt, and it was more about getting myself into an uncomfortable place before I gain more knowledge.</p>
+<p>My first thought was to find some type of starting guide. While the Emacs tutorial helped in terms of understanding navigation and simple editing, it didn&#39;t really show me the true power of the environment that I had gained. A cursory google search brought me to the <a href="https://github.com/technomancy/emacs-starter-kit">Emacs Starter Kit</a>. This toolkit provides some default setting to get you started with the environment; I used the documentation around it to gain knowledge of things like Melpa and Marmalade, which act as Emacs Package Managers of sorts.</p>
+<p>Following my initial setup with the starter kit, I started delving into the <a href="http://www.emacswiki.org/emacs/">emacs wiki</a>. This became a much more handy resource to me, as it provided me with multiple provided solutions to given issues that I&#39;ve encountered while converting my vim-based mind to a constantly-insert-enabled editor. When I&#39;d run into an issue where I found something I&#39;d like to do similar to vim, I&#39;d head to the wiki to find what analogs are available. Once I&#39;d find a package which did what I looked for, I&#39;d test it out with an M-x pacakge-install, and incorporate it into my init.el when I felt I had it down.</p>
+<h4>Evil?</h4><p>I had been asked while converting why I decided not to use a vi-like editor package for Emacs (like Evil or Viper). I felt that, if I were to do this, it would be skimping out on what I should be learning, and I&#39;d get less of an understanding of Emacs because I was sticking to my old method of doing things. Thus, I opted for Emacs&#39;s standard of editing, and no vi-emulation modes.</p>
+<h2>Post-move</h2><p>These are the things that I&#39;ve discovered in the two months since I switched:</p>
+<ul>
+<li>Split pane support. I actually like the way that Emacs splits its windows better than vim. A C-x 2 or C-x 3 is an easy way to remember it; coupled with the &#39;workgroups2&#39; package, configurations can be stored across sessions, too.</li>
+<li>Lisp. This has been a slow one for me, but I&#39;m becoming more interested in learning Lisp and Lisp-like languages, like Clojure. I have a lot of work to do here, and that will be something to work on in the future.</li>
+<li>Tramp. Being able to edit files across an SSH tunnel is a fantastic feature.</li>
+<li>Buffers without files. Since the editor is meant to live on indefinitely, it&#39;s nice to spin up a new buffer and set the mode(s) I want, and let it reside in memory for a while before saving it. If I need to, a save is close enough away, but it works wonders for when I need to take some quick notes.</li>
+<li>ERC. I no longer need a separate IRC cilent; Emacs handles it for me. This is fantastic for me at work, where we frequently use chat to talk around.</li>
+</ul>
+<p>Things I wish I had from Vim:</p>
+<ul>
+<li>Sentence-like movement. I&#39;ve sort of rebuilt this on my own with a combination of line-jumps (M-x goto-line) and ace-jump-mode, but being able to translate &quot;^3wci(&quot; into what it can do in Vim is a skill I have yet to master.</li>
+<li>Mixing modes in HTML. This was noticeably less of a problem in Vim, but I don&#39;t know if it was due to the editor or my lack of noticing that showed just how difficult it is to switch contexts from HTML/CSS/JS all in the same file. I&#39;ve tried doing the nXML hack and multiple modes, but those have worked to no avail.</li>
+<li>Closing the editor. True, I can leave Emacs. But, I miss popping up a new window for one file, and then leaving right after a quick edit.</li>
+<li>Workspace management. Because of the way I separated files into tabs in Vim, I knew each tab matched a different section of what I was working on (or another project entirely).  I lack this with the way that buffers are managed by default in Emacs. I&#39;m still looking for better ways of handling this management, though - workgroups2 has been a nice start.</li>
+</ul>
+<p>Things I know I still have yet to learn:</p>
+<ul>
+<li>More Lisp. I&#39;ve gotten a good start, but that&#39;s a deep rabbit hole.</li>
+<li>Shell, email within Emacs. I used to use a lot of separate tools - now that Emacs contains most of them, I&#39;d like to get better at handling those tasks within Emacs.</li>
+<li>Org-mode. I&#39;ve seen my coworker pull off some crazy things with scheduling and notes within Org-mode, and I&#39;d love to get to the point where I can do them, too.</li>
+<li>Macros and scripting. My next Pragmatic tenet is <em>Write Code That Writes Code</em>; I think getting your editor set to facilitate your programming counts. :)</li>
+</ul>
+<p>We&#39;ll see what the next few months hold.</p>
+]]></description>
+        <pubDate>Sat Feb 28 2015 21:21:36 GMT-0800 (PST)</pubDate>
+        <link>/posts/learning-a-new-editor</link>
+        <guid isPermaLink="true">/posts/learning-a-new-editor</guid>
+      </item>
+    
+    
+      <item>
+        <title>Well, I should've been paying attention</title>
+        <description><![CDATA[<p>So, I guess on 30 April 2013, Posterous Spaces was shuttered. You should see <a href="http://www.posterous.com">what&#39;s there now</a>.</p>
+<p>Then, a full three months later, someone tells me that ballpointcarrot.net isn&#39;t functioning.
+I figure, &quot;I can check it when I find some time. It&#39;s been busy.&quot; </p>
+<p>Cue almost a <em>month</em> after that, and I find that Posterous is gone (as is the content on the old blog).
+Now, I&#39;m working to rebuild and reset different platforms/ideas that can both provide me CNAME linking
+to <a href="http://blog.ballpointcarrot.net">blog.ballpointcarrot.net</a>, and I ran across Github Pages and Octopress.
+I&#39;m gonna give it a try for a while, and see what happens.</p>
+<p>Meanwhile, the main ballpointcarrot site has to go through a redesign, as the automatic feed parsing thing has 
+broken enough times that it&#39;s time to replace it. Expect a new look (but the same old logo) sometime when I find 
+some more time again - so November, maybe. :S</p>
+]]></description>
+        <pubDate>Sat Feb 28 2015 21:21:36 GMT-0800 (PST)</pubDate>
+        <link>/posts/well-i-shouldve-been</link>
+        <guid isPermaLink="true">/posts/well-i-shouldve-been</guid>
+      </item>
+    
+  </channel>
+</rss>
