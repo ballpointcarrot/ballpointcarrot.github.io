@@ -1,8 +1,32 @@
 {
-  "welcome-to-harp": {
-    "title": "Welcome to Harp",
-    "date": "10 Jan 2014",
-    "tags": ["Getting Started"],
+  "posts/yearly-refresh-time": {
+    "title": "Yearly Refresh Time!",
+    "date": "28 Feb 2015",
+    "tags": ["Metablog"],
+    "published": true
+  },
+  "posts/tooling-around": {
+    "title": "Tooling Around",
+    "date": "23 May 2014",
+    "tags": ["Programming", "tools"],
+    "published": true
+  },
+  "posts/redesign-and-goals": {
+    "title": "Redesign, and Goals",
+    "date": "21 May 2014",
+    "tags": ["Metablog", "goals"],
+    "published": true
+  },
+  "posts/learning-a-new-editor": {
+    "title": "Learning a new Editor",
+    "date": "07 Feb 2014",
+    "tags": ["Programming"],
+    "published": true
+  },
+  "posts/well-i-shouldve-been": {
+    "title": "Well, I should've been paying attention",
+    "date": "19 Aug 2013",
+    "tags": ["Metablog"],
     "published": true
   }
 }
