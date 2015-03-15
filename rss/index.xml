@@ -8,6 +8,107 @@
     
     
       <item>
+        <title>Rust (part 2 of n): 'match' and Tuples</title>
+        <description><![CDATA[<p>In order to keep practicing and make sure I keep sharp on what I&#39;m learning, I like to dig through problem sets and write solutions for them. At first, the best resource for these was <a href="https://projecteuler.net">Project Euler</a>, but as time went on, new projects came about that presented problems in slightly different ways:</p>
+<ul>
+<li><a href="http://codewars.com">Codewars</a> gamifies the process a bit, by rating the difficulty of each item; those determine the amount of credit you get by solving them.</li>
+<li><a href="http://codekata.com">CodeKata</a>, which is more of an exercise in repeated solutions to common problems, with the understanding that the repeated practice, you become better over time</li>
+</ul>
+<p>Most recently, I&#39;ve been running through problems on Reddit&#39;s <a href="http://reddit.com/r/dailyprogrammer">DailyProgrammer</a> subreddit. These are community-submitted challenges, separated into easy, medium, and difficult problems. Each of these problems can extend within themselves to offer more flexibility or allow the user more options.</p>
+<p>Today, I had the opportunity to work on the <a href="http://www.reddit.com/r/dailyprogrammer/comments/2ygsxs/20150309_challenge_205_easy_friendly_date_ranges/">most recent &#39;easy&#39; DailyProgrammer challenge</a>. In it, when provided two separate dates, you need to make a pretty printout of the range between them. For example:</p>
+<pre><code class="language-plaintext">2015-03-14, 2015-03-15 =&gt; March 14th - 15th
+2015-03-14, 2016-02-28 =&gt; March 14th - February 28th
+2015-03-14, 2016-03-15 =&gt; March 14th, 2015 - March 15th, 2016
+</code></pre>
+<p>Within the set values, you&#39;ll notice that years can be omitted when they match the current year, but only within a year&#39;s time. In addition, within a single month, you don&#39;t need to print out the month twice (the value is inferred).</p>
+<h3>Rust: &#39;match&#39;</h3><p>During my solution to this problem, I had two problems to solve:</p>
+<ul>
+<li>How do I handle the ordinal values (1st, 2nd, 3rd, etc.) for the dates?</li>
+<li>How do I compare the dates from the original strings to determine the output?</li>
+</ul>
+<p>For both, Rust has some strong utilities for helping with the solution. To solve the ordinal issue, rust provides a &#39;match&#39; keyword, which acts as a more flexible form of most languages&#39; switch/case statements. Within it, we can set matching values, or matching ranges of values, in order to retrieve what we&#39;re looking for.</p>
+<p>In this case, we need 1st, 2nd, and 3rd to be unique, and 4 -&gt; 20 to use &#39;th&#39; (think about it... 11th, 12th, ...). However, we then reach 21, and that ends up using an &#39;st&#39; again. Since our problem only concerns itself with days of a month, we can limit ourselves to an upper bound of 31, as the example below shows:</p>
+<pre><code class="language-rust">fn ordinal(value: usize) -&gt; Option&lt;String&gt; {
+    match value {
+        0 =&gt; Some(String::from_str(&quot;th&quot;)),
+        1 =&gt; Some(String::from_str(&quot;st&quot;)),
+        2 =&gt; Some(String::from_str(&quot;nd&quot;)),
+        3 =&gt; Some(String::from_str(&quot;rd&quot;)),
+        4...20 =&gt; Some(String::from_str(&quot;th&quot;)),
+        21...31 =&gt; ordinal(value % 10),
+        _ =&gt; None
+    }
+}
+</code></pre>
+<p>Some things to point out from the example:</p>
+<ul>
+<li>the fifth matcher uses a range from 4 to 20 inclusive, and will respond with a &#39;th&#39;. This satisfies the requirement for the teens.</li>
+<li>the sixth matcher removes the tens place from the value, and recurses. when it responds, it will have the matcher for just that last place, which fulfilles the rule of 21, 22, etc.</li>
+<li>the last matcher is a <em>catch-all</em> or <em>don&#39;t-care</em> matcher; as we are unconcerned with the value, we just handle the case without the value. This will become more important in the next section.</li>
+</ul>
+<p>Another point of note here is that the function is returning an Option value - as discussed <a href="/posts/rust-non-systems-programmer">in the last post</a>, an Option value is used in situations where you are uncertain about the resultant value, in order to avoid a situation where <code>null</code> would traditionally be used. Finally, the function does not have an explicit <code>return</code> keyword, because the match is acting as an expression and not a statement. By omitting the semicolon, the selected match logic is returned on its own.</p>
+<h3>Rust: Tuples</h3><p>Now that we have the ordinal solved, we can go about formatting the actual output. In order to do so, we need to compare the values of the dates to find the differences between them (less than a month, less than a year, more than a year, etc.). In order to solve this, I arranged the date properties into a <em>tuple</em> - a structure with multiple data points within it.</p>
+<pre><code class="language-rust">let (start_yr, start_mo, start_dy) = start_values[0], start_values[1], start_values[2];
+</code></pre>
+<p>Tuples in Rust can be used in many ways; often, they&#39;re used to provide multiple values as a return of a function, or to store data that is paired or grouped together (like (x,y) coordinates).</p>
+<p>My limited example above is referred to as a <em>destructuring</em> of a tuple - it allows creation of multiple variables from the tuple they were defined from. In other words, I can now use <code>start_yr</code> and <code>start_mo</code> in my code in other spots.</p>
+<p>This example doesn&#39;t show much of the power of what is being done, but watch what happens when you pair it with the <code>match</code> statement from above:</p>
+<pre><code class="language-rust">match (end_yr-start_yr, (end_mo as isize)-(start_mo as isize), (end_dy as isize)-(start_dy as isize)) {
+    (0, 0, 0) =&gt; format!(&quot;{} {}&quot;,
+                         MONTHS[start_mo-1],
+                         print_ordinal(start_dy)),
+    (0, 0, _) =&gt; format!(&quot;{} {} - {}&quot;,
+                         MONTHS[start_mo-1],
+                         print_ordinal(start_dy),
+                         print_ordinal(end_dy)),
+    (0, _, _) =&gt; format!(&quot;{} {} - {} {}&quot;,
+                         MONTHS[start_mo-1],
+                         print_ordinal(start_dy),
+                         MONTHS[end_mo-1],
+                         print_ordinal(end_dy)
+</code></pre>
+<p>Here, we generate a tuple that acts as the difference between the year, month, and day values. Given the assumption that our ranges move forward in time, we present three cases:</p>
+<ul>
+<li>The start and end days are the same. In this case, just print the month and day (you don&#39;t need to print the end day, as it&#39;s the same).</li>
+<li>The difference of the start and end month and year are both zero. In this case, we&#39;re within the same month, so we don&#39;t need to print it twice. Instead, we print the range between the start and end day.</li>
+<li>The year is the same, but we have two different months. In this case, print both months and days.</li>
+</ul>
+<p>Notice that we don&#39;t care about what values we have in the month and day. In a situation where we <em>need</em> that calculation, we can assign variables to it, as well:</p>
+<pre><code class="language-rust">    (1, month, day) =&gt; {
+        let use_yr = match (0.cmp(&amp;month) , 0.cmp(&amp;day)) {
+            (Ordering::Greater, _) =&gt; false,
+            (Ordering::Equal, Ordering::Greater) =&gt; false,
+            (_,_) =&gt; true
+        };
+        if use_yr {
+            format!(&quot;{} {}, {} - {} {}, {}&quot;,
+                    MONTHS[start_mo-1],
+                    print_ordinal(start_dy),
+                    start_yr,
+                    MONTHS[end_mo-1],
+                    print_ordinal(end_dy),
+                    end_yr)
+        } else {
+            format!(&quot;{} {} - {} {}&quot;,
+                    MONTHS[start_mo-1],
+                    print_ordinal(start_dy),
+                    MONTHS[end_mo-1],
+                    print_ordinal(end_dy))
+        }
+    }
+</code></pre>
+<p>Here, we need to know the difference between month and day, as the year changed. However, if the month difference is less than zero (eg: from 2015-12-01 to 2016-03-01), then the year is assumed to be changing, and not printed. By extension, we will do the same with the date (eg: 2015-12-31 -&gt; 2016-12-25).</p>
+<p>We capture those differences from the matcher in the month and day variables, and then use those to make further determinations in the matcher&#39;s block. First, we figure out if we are using the year, based on the conditions above. Then, we choose a format for the date based on if we&#39;re using the year.</p>
+<h3>Testing</h3><p>Rust includes a strong preprocessor, which will examine and selectively compile parts of your code. Based on this, you can keep your unit tests contained within your source file, and they will only be compiled when you run in a test configuration (usually using &#39;cargo test&#39;).</p>
+<p>You can find the crate for my solution <a href="https://github.com/ballpointcarrot/rust-dailyprogrammer/tree/205">on my github repository</a>. Note that there are different branches - I&#39;ll hopefully add more solutions to new branches for each problem that&#39;s solved.</p>
+]]></description>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <link>/posts/rust-nsp-matchers</link>
+        <guid isPermaLink="true">/posts/rust-nsp-matchers</guid>
+      </item>
+    
+    
+      <item>
         <title>Rust, by a non-systems programmer (Part 1 of n)</title>
         <description><![CDATA[<p>I&#39;ve been working on trying to teach myself Rust for the past 4 months or so. It&#39;s been slow-going, because I&#39;m having to
 teach myself things that would have been common knowledge for anyone with previous experience doing systems-level programming
@@ -101,7 +202,7 @@ play around with the system at a lower level, but I struggle with finding projec
 substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&#39;d like to put 
 together something in the middle soon.</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/rust-non-systems-programmer</link>
         <guid isPermaLink="true">/posts/rust-non-systems-programmer</guid>
       </item>
@@ -139,7 +240,7 @@ not just for me, but for people reading, to start putting my thoughts to paper, 
 <p>I&#39;m cautiously optimistic that I can do a better job of updating things. We&#39;ll see if I can make a pattern
 out of it.</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/yearly-refresh-time</link>
         <guid isPermaLink="true">/posts/yearly-refresh-time</guid>
       </item>
@@ -231,7 +332,7 @@ packages:</p>
 soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know
 if you have any questions on any of this, and I&#39;ll do what I can to answer them.</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/tooling-around</link>
         <guid isPermaLink="true">/posts/tooling-around</guid>
       </item>
@@ -243,7 +344,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 <h2>Goals</h2><p>I realize I don&#39;t post much on here, so I want to set a goal for myself for new blog posts. So, starting today, until the end of June, I&#39;ll strive to make a post every 2 days. You should expect to see something Friday. This will allow me to get some of my mind dumped out to the Internet, and expose my thinking to approaches for software. It will also give me time to put down things I&#39;ve learned while working at AWS - expect a lot of the posts to be covering issues with CloudFormation, Elastic Beanstalk, Auto Scaling and more. Plus, I&#39;ll probably have some talk on new JS frameworks, Docker, Ruby gotchas, and anything else I can think of.</p>
 <p>I still should be pretty reachable via the site - the sidebar for posts has my G+, Twitter and email nearby to click on. I&#39;ve also added Disqus comments below, so let me know what you think of the new layout, and my future content.</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/redesign-and-goals</link>
         <guid isPermaLink="true">/posts/redesign-and-goals</guid>
       </item>
@@ -283,7 +384,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 </ul>
 <p>We&#39;ll see what the next few months hold.</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/learning-a-new-editor</link>
         <guid isPermaLink="true">/posts/learning-a-new-editor</guid>
       </item>
@@ -302,7 +403,7 @@ I&#39;m gonna give it a try for a while, and see what happens.</p>
 broken enough times that it&#39;s time to replace it. Expect a new look (but the same old logo) sometime when I find 
 some more time again - so November, maybe. :S</p>
 ]]></description>
-        <pubDate>Sun Mar 08 2015 18:32:17 GMT-0700 (PDT)</pubDate>
+        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
         <link>/posts/well-i-shouldve-been</link>
         <guid isPermaLink="true">/posts/well-i-shouldve-been</guid>
       </item>
