@@ -1,4 +1,10 @@
 {
+    "posts/im-still-here": {
+	"title": "I'm Still Here / Careless Copying",
+	"date": "9 Sept 2015",
+	"tags": ["Metablog", "systems", "whoops"],
+	"published": true
+    },
     "posts/rust-nsp-matchers": {
         "title": "Rust (part 2 of n): 'match' and Tuples",
         "date": "14 Mar 2015",

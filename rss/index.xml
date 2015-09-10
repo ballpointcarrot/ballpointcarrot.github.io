@@ -8,6 +8,37 @@
     
     
       <item>
+        <title>I'm Still Here / Careless Copying</title>
+        <description><![CDATA[<p>I&#39;ve identified that a considerable time has gone by since the last update. I&#39;m going to put some adequate time into resolving that this month and into the future. I&#39;ve been sitting on a couple of topics that I want to dig into (regarding how I handle <a href="http://notmuchmail.org">email</a> and some work I&#39;ve been doing with <a href="http://clojure.org">Clojure</a>).</p>
+<p>In the interim, I&#39;ll leave you with a little anecdote/tale of caution.</p>
+<hr>
+<p>My wife and I (oh yeah, by the way, I got married in April. I really need to work on updates.) frequently play video games together to pass the time. I&#39;m not normally terribly competitive, and she&#39;s not into the traditional multiplayer model of games, so I try to look for games we can play that are multiplayer co-op, or more turn-based (I&#39;ve gotten us both hopelessly addicted to <a href="http://www.civilization.com/">Civilization</a>).</p>
+<p>Recently, with a lapse in new ideas for games, we bought her a copy of <a href="http://store.steampowered.com/sub/32848/">Borderlands 2 on Steam</a> so that we could play through the storyline together. I had played shortly after it came out, and with friends both in the Midwest and in the PNW, so I had a number of game saves on my desktop.</p>
+<p><em>Complication #1</em>: When we play games, normally Jordan gets the desktop, so that she has a better experience with the game. Having already played it, I get relegated to my laptop (running integrated Intel graphics) when I play along.</p>
+<p><em>Complication #2</em>:  The group that did the porting of the game to Linux (<a href="http://www.aspyr.com/">Aspyr Media</a>, who should get amazing credit for their work in extending video games to the Linux world) does not allow for Steam Cloud saves to cross platforms. As such, I had no access to the work I&#39;ve put into the game previously.</p>
+<hr>
+<p>We come to the events of tonight.</p>
+<p>Jordan is away on a work trip, and Christopher is home alone. Christopher decides, &quot;Hey, it&#39;s been forever since I&#39;ve actually gotten to use my desktop for games, and I&#39;ve been playing BL2 recently; let&#39;s play that.&quot;</p>
+<p>An hour passes as Christopher enjoys playing one of his old characters, which is close in level to where he&#39;s at with Jordan.</p>
+<p>Christopher: &quot;Hey - I should see if I can copy over the character data to the laptop, so I have the option to play with those characters when Jordan gets back.&quot;</p>
+<p>After researching, Christopher finds that the character data is saved in files called <code>save&lt;nnnn&gt;.sav</code>. Easy enough to copy from one location to the next.</p>
+<p>Christopher copies the save data to a shared filesystem so he can access it on his laptop, and then fires off the following command:</p>
+<pre><code class="language-shell">cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/&lt;numerical id&gt;/
+</code></pre>
+<p>After thinking about this, Christopher realizes in horror that <em>he&#39;s just saved over his character data he&#39;s been playing with his wife for the majority of the last week</em>.</p>
+<p>Because the <code>cp</code> command doesn&#39;t default the <code>-i/--interactive</code> option, which would prompt on overwrite, it is easy to fall into this trap. In my case, both game saves were named &quot;save0001.sav&quot;, and the <code>cp</code> call replaced my character data with the old one.</p>
+<p>I scoured the Internet for methods of data recovery (there&#39;s a <a href="http://superuser.com/questions/211301/recovery-of-overwritten-file">really</a> <a href="http://unix.stackexchange.com/a/150423">cool</a> <a href="http://unix.stackexchange.com/questions/101237/how-to-recover-files-i-deleted-now-by-running-rm">tangent</a> to take here on how mv/rm/cp actually behave), and most things I found referred to using text contained in the file to find the details. That&#39;d be great, but the data files for those characters are <a href="http://gaming.stackexchange.com/a/84732">encrypted</a>.</p>
+<p>Fortunately (for me), this story has a happy ending. Borderlands 2 has support for <a href="https://en.wikipedia.org/wiki/Steam_%28software%29#cite_ref-39">Steam Cloud</a>. As a last-ditch effort, I removed <em>all</em> save data from the folder on the laptop, and restarted the game. Upon loading, it detected a game save within Steam Cloud that didn&#39;t exist locally, and happily copied that save down to the local machine. I&#39;m even more pleased to say that it was a recent save to, so I didn&#39;t lose my place!</p>
+<hr>
+<p>So, the moral of today&#39;s story: make sure you use (or better yet, alias) cp to <code>cp -i</code>, so that when you write to a directory, you pause before overwriting.</p>
+]]></description>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <link>/posts/im-still-here</link>
+        <guid isPermaLink="true">/posts/im-still-here</guid>
+      </item>
+    
+    
+      <item>
         <title>Rust (part 2 of n): 'match' and Tuples</title>
         <description><![CDATA[<p>In order to keep practicing and make sure I keep sharp on what I&#39;m learning, I like to dig through problem sets and write solutions for them. At first, the best resource for these was <a href="https://projecteuler.net">Project Euler</a>, but as time went on, new projects came about that presented problems in slightly different ways:</p>
 <ul>
@@ -102,7 +133,7 @@
 <h3>Testing</h3><p>Rust includes a strong preprocessor, which will examine and selectively compile parts of your code. Based on this, you can keep your unit tests contained within your source file, and they will only be compiled when you run in a test configuration (usually using &#39;cargo test&#39;).</p>
 <p>You can find the crate for my solution <a href="https://github.com/ballpointcarrot/rust-dailyprogrammer/tree/205">on my github repository</a>. Note that there are different branches - I&#39;ll hopefully add more solutions to new branches for each problem that&#39;s solved.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/rust-nsp-matchers</link>
         <guid isPermaLink="true">/posts/rust-nsp-matchers</guid>
       </item>
@@ -202,7 +233,7 @@ play around with the system at a lower level, but I struggle with finding projec
 substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&#39;d like to put 
 together something in the middle soon.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/rust-non-systems-programmer</link>
         <guid isPermaLink="true">/posts/rust-non-systems-programmer</guid>
       </item>
@@ -240,7 +271,7 @@ not just for me, but for people reading, to start putting my thoughts to paper, 
 <p>I&#39;m cautiously optimistic that I can do a better job of updating things. We&#39;ll see if I can make a pattern
 out of it.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/yearly-refresh-time</link>
         <guid isPermaLink="true">/posts/yearly-refresh-time</guid>
       </item>
@@ -332,7 +363,7 @@ packages:</p>
 soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know
 if you have any questions on any of this, and I&#39;ll do what I can to answer them.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/tooling-around</link>
         <guid isPermaLink="true">/posts/tooling-around</guid>
       </item>
@@ -344,7 +375,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 <h2>Goals</h2><p>I realize I don&#39;t post much on here, so I want to set a goal for myself for new blog posts. So, starting today, until the end of June, I&#39;ll strive to make a post every 2 days. You should expect to see something Friday. This will allow me to get some of my mind dumped out to the Internet, and expose my thinking to approaches for software. It will also give me time to put down things I&#39;ve learned while working at AWS - expect a lot of the posts to be covering issues with CloudFormation, Elastic Beanstalk, Auto Scaling and more. Plus, I&#39;ll probably have some talk on new JS frameworks, Docker, Ruby gotchas, and anything else I can think of.</p>
 <p>I still should be pretty reachable via the site - the sidebar for posts has my G+, Twitter and email nearby to click on. I&#39;ve also added Disqus comments below, so let me know what you think of the new layout, and my future content.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/redesign-and-goals</link>
         <guid isPermaLink="true">/posts/redesign-and-goals</guid>
       </item>
@@ -384,7 +415,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 </ul>
 <p>We&#39;ll see what the next few months hold.</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/learning-a-new-editor</link>
         <guid isPermaLink="true">/posts/learning-a-new-editor</guid>
       </item>
@@ -403,7 +434,7 @@ I&#39;m gonna give it a try for a while, and see what happens.</p>
 broken enough times that it&#39;s time to replace it. Expect a new look (but the same old logo) sometime when I find 
 some more time again - so November, maybe. :S</p>
 ]]></description>
-        <pubDate>Sat Mar 14 2015 18:13:09 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
         <link>/posts/well-i-shouldve-been</link>
         <guid isPermaLink="true">/posts/well-i-shouldve-been</guid>
       </item>
