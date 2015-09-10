@@ -26,7 +26,7 @@ After researching, Christopher finds that the character data is saved in files c
 
 Christopher copies the save data to a shared filesystem so he can access it on his laptop, and then fires off the following command:
 
-```shell
+```bash
 cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/<numerical id>/
 ```
 

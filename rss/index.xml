@@ -23,7 +23,7 @@
 <p>Christopher: &quot;Hey - I should see if I can copy over the character data to the laptop, so I have the option to play with those characters when Jordan gets back.&quot;</p>
 <p>After researching, Christopher finds that the character data is saved in files called <code>save&lt;nnnn&gt;.sav</code>. Easy enough to copy from one location to the next.</p>
 <p>Christopher copies the save data to a shared filesystem so he can access it on his laptop, and then fires off the following command:</p>
-<pre><code class="language-shell">cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/&lt;numerical id&gt;/
+<pre><code class="language-bash">cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/&lt;numerical id&gt;/
 </code></pre>
 <p>After thinking about this, Christopher realizes in horror that <em>he&#39;s just saved over his character data he&#39;s been playing with his wife for the majority of the last week</em>.</p>
 <p>Because the <code>cp</code> command doesn&#39;t default the <code>-i/--interactive</code> option, which would prompt on overwrite, it is easy to fall into this trap. In my case, both game saves were named &quot;save0001.sav&quot;, and the <code>cp</code> call replaced my character data with the old one.</p>
@@ -32,7 +32,7 @@
 <hr>
 <p>So, the moral of today&#39;s story: make sure you use (or better yet, alias) cp to <code>cp -i</code>, so that when you write to a directory, you pause before overwriting.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/im-still-here</link>
         <guid isPermaLink="true">/posts/im-still-here</guid>
       </item>
@@ -133,7 +133,7 @@
 <h3>Testing</h3><p>Rust includes a strong preprocessor, which will examine and selectively compile parts of your code. Based on this, you can keep your unit tests contained within your source file, and they will only be compiled when you run in a test configuration (usually using &#39;cargo test&#39;).</p>
 <p>You can find the crate for my solution <a href="https://github.com/ballpointcarrot/rust-dailyprogrammer/tree/205">on my github repository</a>. Note that there are different branches - I&#39;ll hopefully add more solutions to new branches for each problem that&#39;s solved.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/rust-nsp-matchers</link>
         <guid isPermaLink="true">/posts/rust-nsp-matchers</guid>
       </item>
@@ -233,7 +233,7 @@ play around with the system at a lower level, but I struggle with finding projec
 substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&#39;d like to put 
 together something in the middle soon.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/rust-non-systems-programmer</link>
         <guid isPermaLink="true">/posts/rust-non-systems-programmer</guid>
       </item>
@@ -271,7 +271,7 @@ not just for me, but for people reading, to start putting my thoughts to paper, 
 <p>I&#39;m cautiously optimistic that I can do a better job of updating things. We&#39;ll see if I can make a pattern
 out of it.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/yearly-refresh-time</link>
         <guid isPermaLink="true">/posts/yearly-refresh-time</guid>
       </item>
@@ -363,7 +363,7 @@ packages:</p>
 soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know
 if you have any questions on any of this, and I&#39;ll do what I can to answer them.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/tooling-around</link>
         <guid isPermaLink="true">/posts/tooling-around</guid>
       </item>
@@ -375,7 +375,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 <h2>Goals</h2><p>I realize I don&#39;t post much on here, so I want to set a goal for myself for new blog posts. So, starting today, until the end of June, I&#39;ll strive to make a post every 2 days. You should expect to see something Friday. This will allow me to get some of my mind dumped out to the Internet, and expose my thinking to approaches for software. It will also give me time to put down things I&#39;ve learned while working at AWS - expect a lot of the posts to be covering issues with CloudFormation, Elastic Beanstalk, Auto Scaling and more. Plus, I&#39;ll probably have some talk on new JS frameworks, Docker, Ruby gotchas, and anything else I can think of.</p>
 <p>I still should be pretty reachable via the site - the sidebar for posts has my G+, Twitter and email nearby to click on. I&#39;ve also added Disqus comments below, so let me know what you think of the new layout, and my future content.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/redesign-and-goals</link>
         <guid isPermaLink="true">/posts/redesign-and-goals</guid>
       </item>
@@ -415,7 +415,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 </ul>
 <p>We&#39;ll see what the next few months hold.</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/learning-a-new-editor</link>
         <guid isPermaLink="true">/posts/learning-a-new-editor</guid>
       </item>
@@ -434,7 +434,7 @@ I&#39;m gonna give it a try for a while, and see what happens.</p>
 broken enough times that it&#39;s time to replace it. Expect a new look (but the same old logo) sometime when I find 
 some more time again - so November, maybe. :S</p>
 ]]></description>
-        <pubDate>Wed Sep 09 2015 23:15:20 GMT-0700 (PDT)</pubDate>
+        <pubDate>Wed Sep 09 2015 23:22:29 GMT-0700 (PDT)</pubDate>
         <link>/posts/well-i-shouldve-been</link>
         <guid isPermaLink="true">/posts/well-i-shouldve-been</guid>
       </item>

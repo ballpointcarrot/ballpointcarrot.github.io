@@ -60,7 +60,7 @@
 <p>Christopher: &quot;Hey - I should see if I can copy over the character data to the laptop, so I have the option to play with those characters when Jordan gets back.&quot;</p>
 <p>After researching, Christopher finds that the character data is saved in files called <code>save&lt;nnnn&gt;.sav</code>. Easy enough to copy from one location to the next.</p>
 <p>Christopher copies the save data to a shared filesystem so he can access it on his laptop, and then fires off the following command:</p>
-<pre><code class="language-shell">cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/&lt;numerical id&gt;/
+<pre><code class="language-bash">cp save*.sav ~/.local/share/aspyr-media/borderlands 2/willowgame/savedata/&lt;numerical id&gt;/
 </code></pre>
 <p>After thinking about this, Christopher realizes in horror that <em>he&#39;s just saved over his character data he&#39;s been playing with his wife for the majority of the last week</em>.</p>
 <p>Because the <code>cp</code> command doesn&#39;t default the <code>-i/--interactive</code> option, which would prompt on overwrite, it is easy to fall into this trap. In my case, both game saves were named &quot;save0001.sav&quot;, and the <code>cp</code> call replaced my character data with the old one.</p>
