@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Page Meta -->
+    <title>Ballpointcarrot.net</title>
+    <meta name="description" content="Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- K: Need assets variable , or something like basepath -->
+
+    <!-- <link rel="shortcut icon" href="favicon.ico">-->
+
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" /><!-- K: Need assets variable , or something like basepath -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css" />
+
+    <!-- Ghost outputs important style and meta data with this tag -->
+    <!-- {{ghost_head}} -->
+</head>
+<body class="post-template"><!-- K: body_class variable, home page class is home-template, post is like: post-template tag-getting-started -->
+
+    <!-- Everything else gets inserted here -->
+    
+        <main class="content" role="main">
+
+    <article class="post"><!-- K: {{post_class}}, tags- -->
+        <!-- Each post has the blog logo at the top, with a link back to the home page -->
+        <!-- Each post has the blog logo at the top, with a link back to the home page -->
+<header class="post-header">
+    <a class="blog-logo" href="/">
+        
+            <span class="blog-title">Ballpointcarrot.net</span>
+        
+    </a>
+</header>
+
+        <!-- Everything below outputs content of the the post which has been published -->
+        <span class="post-meta"><time datetime="Mon, 01 Feb 2016 08:00:00 GMT">1 Feb 2016</time> on Tools,Metablog,Systems<!-- {{tags prefix="on " separator=" | "}} --></span>
+
+        <h1 class="post-title">Exploring Nixos</h1>
+
+        <section class="post-content">
+            <p>Late-ish last year (around November, if memory serves), I read about a new OS project which 
+allowed its users a stark departure from traditional Linux methods. Called <a href="http://nixos.org">Nixos</a>, 
+the unique claim that it brought to the table was that the system configuration was managed declaratively, through
+functional configuration files. This includes things like package management, services executed, and user configuration.</p>
+<p>To fit along with my foray into the world of functional programming (my <a href="posts/rust-non-systems-programmer">jumps</a> into <a href="posts/rust-nsp-matchers">Rust</a>
+starting a mental shift, and recent dives into <a href="http://clojure.org/">Clojure</a> sealing the deal), I wanted to give it a shot. There were
+a couple of strong draws for me:</p>
+<ul>
+<li>Defining a configuration for everything leads me to be able to port my configs from place to place</li>
+<li>The comfort to screw up; that is, the ability to roll back in case things got weird</li>
+<li>A new learning experience - it&#39;s been a long time since I&#39;ve installed something new just to give it a shot.</li>
+</ul>
+<p>I finally made the jump around mid-December, so I&#39;ve been on it on my laptop for about a month and a half. Not constantly, but enough
+that I could make the configuration my own, and start to find out where things have been good, and what still needs to improve (both
+my understanding of Nixos and in the system).</p>
+<h2>Packaging and Installation</h2><p>Nixos provides an ISO from their website, as is often the case with linux distros. The only qualm that I had in this stage is that,
+because I wanted to do a <a href="https://nixos.org/wiki/Installing_NixOS_from_a_USB_stick">UEFI installation via USB</a>, I had to jump through a 
+few extra hoops in order to get things working correctly. This is less of a problem with Nixos specifically, and more endemic to the 
+linux community as a whole - we need to make UEFI boot media easier to create. I miss the days of <code>dd if=&lt;iso&gt; of=&lt;flash-drive&gt;</code>. :)</p>
+<p>I was pleasantly surprised to see that you could boot into a graphical environment using the boot media. This is something that some
+<a href="https://www.archlinux.org/">major distributions</a> still seem to miss, and I was impressed to see a relatively young distro include a UI, 
+even if it didn&#39;t handle the installation that way. At the very least, it gives you a sense of &quot;try before you buy.&quot;</p>
+<p>The initial read-through of the <a href="http://nixos.org/nixos/manual/index.html#sec-installation">Nixos Manual</a> were useful, but sparse in places where more
+information (particularly for a new user) would have been helpful. As you can see, the first 9 steps are pretty straightforward - hard disk setup, loading
+options for runtime, etc. </p>
+<p><em>Then there&#39;s step 10.</em></p>
+<p>&quot;Edit this file&quot; has a lot of openness to it. They do give you some resources around here (links to detailed configuration docs, a 
+very barebones initial config, and links to &quot;real-world installations&quot; to compare to), but as your first foray into the format
+of the configuration.nix file, I would have <strong>loved</strong> a &quot;guided tour&quot; here, giving insight into why the file structure is how it is,
+common configuration options for particular installation types, and a more &quot;this is a normal base installation&quot; config instead of the bare
+config provided in the manual. </p>
+<p>In my mind, this is where <em>the magic</em> of Nixos happens - the documentation should highlight the magic,
+calling out its importance and showcasing how the features work. Imagine my surprise (and delight!) when I found I could enable xorg with a single line:</p>
+<pre><code class="language-plain">services.xserver.displayManager.sddm.enable = true;
+</code></pre>
+<p>Having fast, impacting implementations of large swaths of software fed through because a single option was enabled? Again, that&#39;s <em>magic</em>, and that&#39;s what needs advertised here.</p>
+<p>Other first-order-of-business options for me at installation are things like:</p>
+<ul>
+<li>Adjusting the keyboard layout (Dvorak)</li>
+<li>Setting timezone and verifying current time (with optional NTP)</li>
+<li>laptop configuration (thinkpad module, touchpad config)</li>
+</ul>
+<p>These were all fairly easy to find though the nixos wiki - when you&#39;ve had other users run into the same configurations, 
+it&#39;s always nice to have them easy to find.</p>
+<p>The rest of the installation was a breeze - you run nixos-install, set your root password at the end, and then reboot into your new OS.</p>
+<h2>Using it</h2><p>Now I had a base working system, and it only took me a few generations of building and rebooting. After about generation 6-7 or so, I had
+things down to where I liked them for a start. From here, it was time to dig into what I could do with it.</p>
+<h3>Getting comfortable...</h3><p>My laptop is used for a couple of things:</p>
+<ul>
+<li>Internet browsing</li>
+<li>Programming projects</li>
+<li>Photo editing</li>
+</ul>
+<p>Setting up to get these tasks done wasn&#39;t terribly hard. However, a <em>Really Cool Thing™</em> about Nixos is that you can do these <em>per user</em>.</p>
+<p>Let me reiterate that:</p>
+<blockquote>
+<p><em>Package installation can be done at the per-user level!</em></p>
+</blockquote>
+<p>That&#39;s huge in my mind, for multiple reasons. First, I&#39;m sure I&#39;m not the only one who will end up using this laptop. In the event that I need to <em>share</em>, this gives me a way to keep my configuration and structure completely isolated from another users, where I can have only the things I want installed for me. In addition, I don&#39;t have to muck about with installing everything system-wide, so I don&#39;t have to use the shared folders (and <code>sudo</code> calls everywhere) to do it. Finally, I like to configure tools in ways that could be confusing to others. This way, I can not only have the tool&#39;s configuration, but <em>the tool itself</em> in my user account.</p>
+<p>In an effort to unite the ability to do this with the Nixos &quot;declarative by nature&quot; package management, <code>nix-env</code> was born:</p>
+<pre><code class="language-plain">$ nix-env -qaP nitrogen       # a package for setting wallpapers for non-standard WMs.
+nixos.nitrogen        nitrogen-1.5.2
+nixos-15.09.nitrogen  nitrogen-1.5.2
+
+$ nix-env -i nitrogen         # to install
+</code></pre>
+<p>The end result is that the package has been added to the user environment, and a reference to the package has been added to the user manifest inside of their Nix profile. As an odd side-effect of how nix packages are stored, take a look at my system $PATH variable:</p>
+<pre><code class="language-plain">$ echo $PATH 
+/home/ckruse/bin:/var/setuid-wrappers:/home/ckruse/.nix-profile/bin:/home/ckruse/.nix-profile/sbin:/home/ckruse/.nix-profile/lib/kde4/libexec:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/nix/var/nix/profiles/default/lib/kde4/libexec:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib/kde4/libexec
+</code></pre>
+<p>Looking through that, you&#39;ll see the conspicuous absence of our friends in <code>/bin</code>, <code>/usr/bin</code>, and <code>/usr/local/bin</code>. These directories aren&#39;t used - instead, packages get built in their own compartmentalized sections, and then are symlinked into the running context (system-wide, at <code>/run/current-system/sw/bin</code>, and for each user, at <code>/home/&lt;user&gt;/.nix-profile/bin</code>). This is awesome for generating your environments while in the nix context, but it can have some troubles.</p>
+<h3>...and uncomfortable</h3><p>About 2 weeks ago, I wanted to sit down and create this very blog post, detailing the experiences that I had with migrating things over. I mentioned this <a href="/posts/yearly-refresh-time">in the past</a>, but my blog posts are generated code based on Harp, a NodeJS static site generator.</p>
+<p>In the past, I used to manage my node installations with the wonderful <a href="https://github.com/creationix/nvm">nvm</a> version manager, a set of shell scripts which shim versions of node to be used. However, this spectacularly failed with my Nixos installation. Versions of node installed via nvm did not have access to runtime libs that they would need, and so proper symlinking and running of these node versions failed, and failed hard.</p>
+<p>While stuck with this problem, I realized I could settle for using the system-provided Node version. However, this led to its own problems, because now we have two separate package managers (nix and npm). There is <a href="http://blog.lastlog.de/posts/nodejs_on_nixos_status/">a push</a> to incorporate npm packages into nix using the npm2nix utility, but I feel that, especially given separate development projects have their own dependency manifests, this is a step in the wrong direction.</p>
+<p>As a separate method to approach this problem, I read up on <a href="">creating separate script profiles</a> for running your development projects in. I thought, &quot;Great! I&#39;ll spin this up with the system node.js, install harp, and run with it.&quot; Unfortunately, the harp install fell through, because I didn&#39;t have write access to the global install directory for node (as I shouldn&#39;t, because then the implementation leaks out into the package build). </p>
+<p>For now, I&#39;m using a separate dev host + ssh to update here. I&#39;ll want to dig into this further to see if I can get a good solution figured out. As of now, I know that <code>npm install -g &lt;whatever&gt;</code> isn&#39;t a good idea. Now I either find a better way (Docker could be a fun insert here), I change the blog backend again, or I wipe and start with a fresh installation of &quot;new distro ++&quot;.</p>
+        </section>
+
+        <footer class="post-footer">
+
+            
+                <section class="author">
+                    <h4>Christopher Kruse</h4>
+                    <p>AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns.</p>
+                </section>
+            
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Exploring Nixos&url=/exploring-nixos"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/exploring-nixos"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/exploring-nixos"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+
+</main>
+    
+
+    <footer class="site-footer">
+    <a class="subscribe icon-feed" href="/rss/index.xml"><span class="tooltip">Subscribe!</span></a>
+    <div class="inner">
+         <section class="copyright">All content copyright <a href="/">ballpointcarrot.net</a> &copy; 2016 &bull; All rights reserved.</section>
+         <section class="poweredby">Proudly published with <a class="" href="http://harpjs.com">Harp</a></section>
+    </div>
+</footer>
+
+    <!-- Ghost outputs important scripts and data with this tag -->
+    <!-- {{ghost_foot}} -->
+
+    <!-- The main JavaScript file for Casper -->
+    <script type="text/javascript" src="/assets/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript" src="/assets/js/prism.js"></script>
+
+</body>
+</html>

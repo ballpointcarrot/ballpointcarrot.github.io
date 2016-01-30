@@ -1,4 +1,10 @@
 {
+    "posts/exploring-nixos": {
+	"title": "Exploring Nixos",
+	"date": "1 Feb 2016",
+	"tags": ["Tools", "Metablog", "Systems"],
+	"published": true
+    },
     "posts/im-still-here": {
 	"title": "I'm Still Here / Careless Copying",
 	"date": "9 Sept 2015",
