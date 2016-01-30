@@ -3,7 +3,7 @@ allowed its users a stark departure from traditional Linux methods. Called [Nixo
 the unique claim that it brought to the table was that the system configuration was managed declaratively, through
 functional configuration files. This includes things like package management, services executed, and user configuration.
 
-To fit along with my foray into the world of functional programming (my [jumps](posts/rust-non-systems-programmer) into [Rust](posts/rust-nsp-matchers)
+To fit along with my foray into the world of functional programming (my [jumps](/posts/rust-non-systems-programmer) into [Rust](/posts/rust-nsp-matchers)
 starting a mental shift, and recent dives into [Clojure](http://clojure.org/) sealing the deal), I wanted to give it a shot. There were
 a couple of strong draws for me:
 

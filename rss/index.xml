@@ -13,7 +13,7 @@
 allowed its users a stark departure from traditional Linux methods. Called <a href="http://nixos.org">Nixos</a>, 
 the unique claim that it brought to the table was that the system configuration was managed declaratively, through
 functional configuration files. This includes things like package management, services executed, and user configuration.</p>
-<p>To fit along with my foray into the world of functional programming (my <a href="posts/rust-non-systems-programmer">jumps</a> into <a href="posts/rust-nsp-matchers">Rust</a>
+<p>To fit along with my foray into the world of functional programming (my <a href="/posts/rust-non-systems-programmer">jumps</a> into <a href="/posts/rust-nsp-matchers">Rust</a>
 starting a mental shift, and recent dives into <a href="http://clojure.org/">Clojure</a> sealing the deal), I wanted to give it a shot. There were
 a couple of strong draws for me:</p>
 <ul>
@@ -86,7 +86,7 @@ $ nix-env -i nitrogen         # to install
 <p>As a separate method to approach this problem, I read up on <a href="">creating separate script profiles</a> for running your development projects in. I thought, &quot;Great! I&#39;ll spin this up with the system node.js, install harp, and run with it.&quot; Unfortunately, the harp install fell through, because I didn&#39;t have write access to the global install directory for node (as I shouldn&#39;t, because then the implementation leaks out into the package build). </p>
 <p>For now, I&#39;m using a separate dev host + ssh to update here. I&#39;ll want to dig into this further to see if I can get a good solution figured out. As of now, I know that <code>npm install -g &lt;whatever&gt;</code> isn&#39;t a good idea. Now I either find a better way (Docker could be a fun insert here), I change the blog backend again, or I wipe and start with a fresh installation of &quot;new distro ++&quot;.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/exploring-nixos</link>
         <guid isPermaLink="true">/posts/exploring-nixos</guid>
       </item>
@@ -117,7 +117,7 @@ $ nix-env -i nitrogen         # to install
 <hr>
 <p>So, the moral of today&#39;s story: make sure you use (or better yet, alias) cp to <code>cp -i</code>, so that when you write to a directory, you pause before overwriting.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/im-still-here</link>
         <guid isPermaLink="true">/posts/im-still-here</guid>
       </item>
@@ -218,7 +218,7 @@ $ nix-env -i nitrogen         # to install
 <h3>Testing</h3><p>Rust includes a strong preprocessor, which will examine and selectively compile parts of your code. Based on this, you can keep your unit tests contained within your source file, and they will only be compiled when you run in a test configuration (usually using &#39;cargo test&#39;).</p>
 <p>You can find the crate for my solution <a href="https://github.com/ballpointcarrot/rust-dailyprogrammer/tree/205">on my github repository</a>. Note that there are different branches - I&#39;ll hopefully add more solutions to new branches for each problem that&#39;s solved.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/rust-nsp-matchers</link>
         <guid isPermaLink="true">/posts/rust-nsp-matchers</guid>
       </item>
@@ -318,7 +318,7 @@ play around with the system at a lower level, but I struggle with finding projec
 substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&#39;d like to put 
 together something in the middle soon.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/rust-non-systems-programmer</link>
         <guid isPermaLink="true">/posts/rust-non-systems-programmer</guid>
       </item>
@@ -356,7 +356,7 @@ not just for me, but for people reading, to start putting my thoughts to paper, 
 <p>I&#39;m cautiously optimistic that I can do a better job of updating things. We&#39;ll see if I can make a pattern
 out of it.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/yearly-refresh-time</link>
         <guid isPermaLink="true">/posts/yearly-refresh-time</guid>
       </item>
@@ -448,7 +448,7 @@ packages:</p>
 soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know
 if you have any questions on any of this, and I&#39;ll do what I can to answer them.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/tooling-around</link>
         <guid isPermaLink="true">/posts/tooling-around</guid>
       </item>
@@ -460,7 +460,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 <h2>Goals</h2><p>I realize I don&#39;t post much on here, so I want to set a goal for myself for new blog posts. So, starting today, until the end of June, I&#39;ll strive to make a post every 2 days. You should expect to see something Friday. This will allow me to get some of my mind dumped out to the Internet, and expose my thinking to approaches for software. It will also give me time to put down things I&#39;ve learned while working at AWS - expect a lot of the posts to be covering issues with CloudFormation, Elastic Beanstalk, Auto Scaling and more. Plus, I&#39;ll probably have some talk on new JS frameworks, Docker, Ruby gotchas, and anything else I can think of.</p>
 <p>I still should be pretty reachable via the site - the sidebar for posts has my G+, Twitter and email nearby to click on. I&#39;ve also added Disqus comments below, so let me know what you think of the new layout, and my future content.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/redesign-and-goals</link>
         <guid isPermaLink="true">/posts/redesign-and-goals</guid>
       </item>
@@ -500,7 +500,7 @@ if you have any questions on any of this, and I&#39;ll do what I can to answer t
 </ul>
 <p>We&#39;ll see what the next few months hold.</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/learning-a-new-editor</link>
         <guid isPermaLink="true">/posts/learning-a-new-editor</guid>
       </item>
@@ -519,7 +519,7 @@ I&#39;m gonna give it a try for a while, and see what happens.</p>
 broken enough times that it&#39;s time to replace it. Expect a new look (but the same old logo) sometime when I find 
 some more time again - so November, maybe. :S</p>
 ]]></description>
-        <pubDate>Sat Jan 30 2016 01:27:50 GMT-0800 (PST)</pubDate>
+        <pubDate>Sat Jan 30 2016 01:32:33 GMT-0800 (PST)</pubDate>
         <link>/posts/well-i-shouldve-been</link>
         <guid isPermaLink="true">/posts/well-i-shouldve-been</guid>
       </item>
