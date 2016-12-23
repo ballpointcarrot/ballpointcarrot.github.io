@@ -1,4 +1,10 @@
 {
+    "posts/not-red-not-blue": {
+        "title": "Not Red, Not Blue",
+        "date": "23 Dec 2016",
+        "tags": ["Politics"],
+        "published": false
+    },
     "posts/exploring-nixos": {
 	"title": "Exploring Nixos",
 	"date": "1 Feb 2016",
