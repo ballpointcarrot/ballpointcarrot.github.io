@@ -1,10 +1,10 @@
 {
-    "posts/not-red-not-blue": {
-        "title": "Not Red, Not Blue",
-        "date": "23 Dec 2016",
-        "tags": ["Politics"],
-        "published": false
-    },
+    "posts/tracking-while-you-gogo": {
+        "title": "Tracking while you Gogo",
+        "date": "9 Jan 2017",
+        "tags": ["airplanes", "programming", "fun"],
+        "published": true
+    }, 
     "posts/exploring-nixos": {
 	"title": "Exploring Nixos",
 	"date": "1 Feb 2016",

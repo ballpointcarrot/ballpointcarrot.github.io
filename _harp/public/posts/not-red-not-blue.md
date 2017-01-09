@@ -7,6 +7,11 @@ But then 2016 happened, with all its tragic loss, surprise outcomes, and interna
 As we approach the end of the year, and with grave uncertainty and a perverse dread as to what a Trump-led 2017 brings us, I want to - no, I *need* to - get some of my frustrations out of my own head. The crux of the following argument is this: I'm a complex being, and I have complex ideals - I shouldn't be categorized into "red" or "blue." I want a political system where I feel like I have the opportunity to choose someone who actually approaches those ideals.
 
 ---
-
+"posts/not-red-not-blue": {
+        "title": "Not Red, Not Blue",
+        "date": "23 Dec 2016",
+        "tags": ["Politics"],
+        "published": "false"
+    },
 
 
