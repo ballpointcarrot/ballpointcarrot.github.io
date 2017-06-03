@@ -20,8 +20,11 @@
    (global-metadata :filename "ballpointcarrot.net.edn")
    (markdown)
    (word-count)
-   (print-meta)
-   (render :renderer 'net.ballpointcarrot.blog.index/render)
+   (atom-feed)
+   ;; (tags :renderer TODO)
+   ;;(print-meta)
+   (render :renderer 'net.ballpointcarrot.blog.views.post/render-post)
+   (collection :renderer 'net.ballpointcarrot.blog.views.index/render :page "index.html")
    ))
 
 (deftask publish

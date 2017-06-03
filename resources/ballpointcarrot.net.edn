@@ -4,8 +4,8 @@
  :site-sub-title "Orange and goes \"Click, Click.\""
  :meta-description "Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA."
  :cover-image "/assets/img/hero-blurred.jpg"
- :author {:name "Christopher Kruse"
-          :email "ckruse@ballpointcarrot.net"
-          :twitter "https://twitter.com/ballpointcarrot"
-          :bio "AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns."}
- }
+ :author "Christopher Kruse"
+ :author-email "ckruse@ballpointcarrot.net"
+ :author-twitter "https://twitter.com/ballpointcarrot"
+ :author-bio "AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns."}
+}
