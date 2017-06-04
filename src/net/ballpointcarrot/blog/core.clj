@@ -1,5 +1,8 @@
 (ns net.ballpointcarrot.blog.core
+  (require [clojure.string :as str])
   (use [hiccup.page :refer (include-css include-js)]))
+
+(def default-excerpt-wordcount 100)
 
 (defn header
   "Provides the HTML head tag attributes for all pages"
@@ -25,12 +28,44 @@
           localdate (java.time.LocalDateTime/ofInstant (.toInstant date) (java.time.ZoneId/systemDefault))]
       (.format format localdate))))
 
+(defn post-header [post]
+  [:span.post-meta
+   [:date {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
+   [:div.tags (for [tag (:tags post)]
+                [:a {:href (str "/path/to/" tag)
+                     :style "padding: 0 0.5rem 0 0;"} tag]
+                )]
+   (if (:draft post)
+     [:div.unpublished "DRAFT"])])
+
+(defn link-to-post [base-url post]
+  [:a {:href (str base-url (:parent-path post) (:short-filename post) ".html")}
+   (:title post)])
+
+(defn post-excerpt
+  ([post]
+   (post-excerpt post default-excerpt-wordcount))
+  ([post wordcount]
+   (let [excerpt (fn [content-seq] (take wordcount content-seq))
+         rejoin (fn [content-seq] (str/join " " content-seq))]
+     (-> (:content post)
+         (str/split #"\s")
+         (excerpt)
+         (rejoin)
+         (str "...")))))
+
 (defn js-includes
   "Include common Javascript files"
   []
   (include-js "/assets/js/index.js"
               "/assets/js/prism.js"))
+
 (defn footer
   "Provides final common page details."
   [metadata]
+  [:footer.site-footer
+   [:a {:class "subscribe icon-feed" :href (str (:base-url metadata) "atom.xml")}
+    [:span.tooltip "Subscribe!"]]
+   [:div.inner
+    [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]]
   )

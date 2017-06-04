@@ -13,14 +13,16 @@
        [:h1.blog-title (:site-title global-metadata)]
        [:h2.blog-description (:site-sub-title global-metadata)]]]]
     [:main.content {:role "main"}
-     (for [post entries]
+     (for [post (take (:home-post-count global-metadata) entries)] 
        [:article.post
         [:header.post-header
-         [:span.post-meta
-          [:time {:datetime (bpc/date-string (:date-created post))} (bpc/date-string (:date-created post))]
-          [:div.tags "TAGS"]]
+         (bpc/post-header post)
          [:h2.post-title
-          [:a {:href ""} (:title post)]]]
+          (bpc/link-to-post (:base-url global-metadata) post)]]
         [:section.post-excerpt
-         [:p "TEXT GOES HERE"]]])]
+         [:p (bpc/post-excerpt post)]]])
+     [:div.pagination
+      [:a {:href "/archive"} "Archives"]
+      [:a {:href "/tags"} "Tags"]]]
+    (bpc/footer global-metadata)
     (bpc/js-includes)])) 

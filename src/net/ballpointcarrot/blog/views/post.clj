@@ -12,11 +12,7 @@
       [:a.blog-logo {:href (:base-url meta)}
        [:span.blog-title (:site-title meta)]]]
      [:article.post
-      [:span.post-meta
-       [:date {:datetime (bpc/date-string (:date-created current))} (bpc/date-string (:date-created current))]
-       [:div.tags (for [tag (:tags current)]
-                    [:a.tags {:href (str "/path/to/" tag)} tag]
-                    )]]
+      (bpc/post-header current)
       [:h1.post-title (:title current)]
       [:section.post-content (:content current)]
       [:footer.post-footer 
@@ -36,9 +32,5 @@
         [:span.share-reddit
          [:a.icon-reddit {:href "" :onclick ""}]
          [:span.hidden "Reddit"]]]]]]
-    [:footer.site-footer
-     [:a {:class "subscribe icon-feed" :href (str (:base-url meta) "/atom.xml")}
-      [:span.tooltip "Subscribe!"]]
-     [:div.inner
-      [:section.copyright "All content copyright " [:a {:href (:base-url meta)} (:site-title meta)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]]
+    (bpc/footer meta)
     (bpc/js-includes)]))
