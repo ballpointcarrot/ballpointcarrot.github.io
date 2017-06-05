@@ -26,7 +26,11 @@
    (render :renderer 'net.ballpointcarrot.blog.views.post/render-post)
    (collection :renderer 'net.ballpointcarrot.blog.views.index/render
                :sortby :date-created
-               :page "index.html")))
+               :page "index.html")
+   (collection :renderer 'net.ballpointcarrot.blog.views.archive/render
+               :sortby :date-created
+               :page "archive.html") 
+   ))
 
 (deftask publish
   "Build the production version of the blog for publishing on Github."
