@@ -1,3 +1,19 @@
+---
+title: "Rust, by a non-systems programmer (Part 1 of n)"
+author: Christopher Kruse
+author-email: ckruse@ballpointcarrot.net
+author-url: http://www.ballpointcarrot.net
+author-github: ballpointcarrot
+author-twitter: ballpointcarrot
+date-created: 2015-03-08
+date-published: 2015-03-08
+in-language: en
+keywords: rust, rustlang, strings, io
+canonical-url: http://www.ballpointcarrot.net/posts/rust-non-systems-programmers
+tags:
+ - rust
+ - Programming
+---
 I've been working on trying to teach myself Rust for the past 4 months or so. It's been slow-going, because I'm having to
 teach myself things that would have been common knowledge for anyone with previous experience doing systems-level programming
 in C or C++. Instead, this will be more or less of a brain dump of a rubyist that is picking up some systems-level knowledge.
@@ -6,7 +22,7 @@ in C or C++. Instead, this will be more or less of a brain dump of a rubyist tha
 
 Coming from a scripting language like Ruby, basic string input and output is fairly straightforward:
 
-```ruby
+```lang-ruby
 puts "How old are you?"
 age = gets.strip
 puts "You've said #{age} years, which is #{(age.to_i*365.25).to_i} days."
@@ -14,7 +30,7 @@ puts "You've said #{age} years, which is #{(age.to_i*365.25).to_i} days."
 
 In Rust, this becomes significantly more involved:
 
-```rust
+```lang-rust
 #![feature(old_io)]
 use std::old_io::stdin;
 use std::str::FromStr;
@@ -54,7 +70,7 @@ The second string type, `String`, is used when you want to maintain ownership ov
 are "growable" - that is, they can be added to as mutable variables. 
 
 Be careful to understand what type of string you'll be dealing with; functions generally operate on the more general `&str` type,
-so you may need to convert back and forth between the two types with `String::as\_slice` or `"".to\_string()`.
+so you may need to convert back and forth between the two types with `String::as_slice` or `"".to_string()`.
 
 ### Handling input possibilities
 
@@ -79,7 +95,7 @@ application being run.
 In Rust, there is no GC. Instead, the compiler has a notion of "ownership," as we discussed earlier. Check out the following 
 snippet:
 
-```rust
+```lang-rust
     let x = Box::new(5);
     {   
         let y = x;
@@ -94,7 +110,7 @@ into it; this is considered by the Rust compiler to be a "move" - both pointers 
 new owner of the Box, as x has transferred ownership. Because of this, line 6 fails to compile correctly, as the value owner 
 has been moved:
 
-```plaintext
+```lang-plaintext
 src/main.rs:7:25: 7:26 error: use of moved value: `x`
 src/main.rs:7     println!("x == {}", x);
                                       ^

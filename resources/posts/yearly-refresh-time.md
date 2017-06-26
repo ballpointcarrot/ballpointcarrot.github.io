@@ -1,3 +1,18 @@
+---
+title: "Yearly Refresh Time!"
+author: Christopher Kruse
+author-email: ckruse@ballpointcarrot.net
+author-url: http://www.ballpointcarrot.net
+author-github: ballpointcarrot
+author-twitter: ballpointcarrot
+date-created: 2015-02-28
+date-published: 2015-02-28
+in-language: en
+keywords: refresh, cleanup, style
+canonical-url: http://www.ballpointcarrot.net/posts/exploring-nixos
+tags:
+ - Metablog
+---
 I don't know if it's the digital form of spring cleaning, or if there's a standing need to clean things up
 and keep them looking nicely, but I found it time this weekend to update the visual and functional aspects
 of my blog. With that being said, welcome to ballpointcarrot.net, version...4, I think?  I haven't done a 
@@ -21,7 +36,7 @@ is a port of [Casper](https://github.com/TryGhost/Casper), which is the default 
 highlighting library called [Prism](http://prismjs.com/) to help with code snippets (which I'll be able 
 to use more frequently, I'm hoping!). 
 
-```javascript
+```lang-javascript
 christopher.blog_upgrade = true;
 ```
 

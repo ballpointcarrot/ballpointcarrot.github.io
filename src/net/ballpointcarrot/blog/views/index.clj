@@ -22,7 +22,7 @@
         [:section.post-excerpt
          [:p (bpc/post-excerpt post)]]])
      [:div.pagination
-      [:a {:href "/archive"} "Archives"]
-      [:a {:href "/tags"} "Tags"]]]
+      [:a {:href "/archive.html"} "Archives"]
+      [:a {:href "/tags.html"} "Tags"]]]
     (bpc/footer global-metadata)
     (bpc/js-includes)])) 

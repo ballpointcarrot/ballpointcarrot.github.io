@@ -59,7 +59,7 @@ config provided in the manual.
 In my mind, this is where *the magic* of Nixos happens - the documentation should highlight the magic,
 calling out its importance and showcasing how the features work. Imagine my surprise (and delight!) when I found I could enable xorg with a single line:
 
-```plain
+```lang-plaintext
 services.xserver.displayManager.sddm.enable = true; 
 ```
 
@@ -99,7 +99,7 @@ That's huge in my mind, for multiple reasons. First, I'm sure I'm not the only o
 
 In an effort to unite the ability to do this with the Nixos "declarative by nature" package management, `nix-env` was born:
 
-```plain
+```lang-plaintext
 $ nix-env -qaP nitrogen       # a package for setting wallpapers for non-standard WMs.
 nixos.nitrogen        nitrogen-1.5.2
 nixos-15.09.nitrogen  nitrogen-1.5.2
@@ -109,7 +109,7 @@ $ nix-env -i nitrogen         # to install
 
 The end result is that the package has been added to the user environment, and a reference to the package has been added to the user manifest inside of their Nix profile. As an odd side-effect of how nix packages are stored, take a look at my system $PATH variable:
 
-```plain
+```lang-plaintext
 $ echo $PATH 
 /home/ckruse/bin:/var/setuid-wrappers:/home/ckruse/.nix-profile/bin:/home/ckruse/.nix-profile/sbin:/home/ckruse/.nix-profile/lib/kde4/libexec:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/nix/var/nix/profiles/default/lib/kde4/libexec:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib/kde4/libexec
 ```

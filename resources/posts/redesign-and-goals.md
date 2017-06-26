@@ -1,3 +1,19 @@
+---
+title: Redesign, and Goals
+author: Christopher Kruse
+author-email: ckruse@ballpointcarrot.net
+author-url: http://www.ballpointcarrot.net
+author-github: ballpointcarrot
+author-twitter: ballpointcarrot
+date-created: 2014-05-23
+date-published: 2014-05-23
+in-language: en
+keywords: goals
+canonical-url: http://www.ballpointcarrot.net/posts/redesign-and-goals
+tags:
+ - Metablog
+ - Goals
+---
 ## New Site Layout!
 
 Hey everyone! After taking time to look through and see what it would take to maintain the old ballpointcarrot.net site (residing on a mostly-dormant 1-dyno Heroku install), I've decided to forgo it and run everything on Octopress. Let me know if you have positives/negatives to say about the changes. I feel it's a positive step, and it's one less account to keep open for me. Bonus.
