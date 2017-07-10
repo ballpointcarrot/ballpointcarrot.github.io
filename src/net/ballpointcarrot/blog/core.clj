@@ -2,8 +2,6 @@
   (require [clojure.string :as str])
   (use [hiccup.page :refer (include-css include-js)]))
 
-(def default-excerpt-wordcount 100)
-
 (defn header
   "Provides the HTML head tag attributes for all pages"
   [metadata]
@@ -18,7 +16,6 @@
    (include-css "/assets/css/screen.css"
                 "//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic%7COpen+Sans:700,400"
                 "/assets/css/prism.css")
-   
    ])
 
 (defn date-string [date]
@@ -32,27 +29,15 @@
   [:span.post-meta
    [:date {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
    [:div.tags (for [tag (:tags post)]
-                [:a {:href (str "/path/to/" tag)
+                [:a {:href (str "/tags/" tag ".html")
                      :style "padding: 0 0.5rem 0 0;"} tag]
                 )]
    (if (:draft post)
      [:div.unpublished "DRAFT"])])
 
 (defn link-to-post [base-url post]
-  [:a {:href (str base-url (:parent-path post) (:short-filename post) ".html")}
+  [:a {:href (:canonical-url post)}
    (:title post)])
-
-(defn post-excerpt
-  ([post]
-   (post-excerpt post default-excerpt-wordcount))
-  ([post wordcount]
-   (let [excerpt (fn [content-seq] (take wordcount content-seq))
-         rejoin (fn [content-seq] (str/join " " content-seq))]
-     (-> (:content post)
-         (str/split #"\s")
-         (excerpt)
-         (rejoin)
-         (str "...")))))
 
 (defn js-includes
   "Include common Javascript files"
