@@ -13,7 +13,8 @@
         [:span.blog-title (:site-title meta)]]
        [:div.blog-sub-title (str "Posts tagged with: " (:tag current))]]
       [:div.archive
+       [:ul
        (for [post posts]
-         [:li (bpc/link-to-post (:base-url meta) post)])]]]
+         [:li (bpc/link-to-post (:base-url meta) post)])]]]]
     (bpc/footer meta)
     (bpc/js-includes)))

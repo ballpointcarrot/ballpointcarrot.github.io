@@ -13,8 +13,8 @@
        [:h1.blog-title (:site-title global-metadata)]
        [:h2.blog-description (:site-sub-title global-metadata)]]]]
     [:main.content {:role "main"}
-     ;; (for [post (take (:home-post-count global-metadata) entries)]
-     (for [post entries]
+     (for [post (take (:home-post-count global-metadata) entries)]
+     ; (for [post entries]
        [:article.post
         [:header.post-header
          (bpc/post-header post)

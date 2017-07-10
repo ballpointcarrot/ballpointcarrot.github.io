@@ -75,6 +75,9 @@
                :sortby :date-created
            :filterer post?
                :page "archive.html")
+   (collection :renderer 'net.ballpointcarrot.blog.views.tagindex/render
+               :filterer post?
+               :page "tags.html")
    (tags :renderer 'net.ballpointcarrot.blog.views.tags/render
            :filterer post?
          :out-dir "public/tags")))
