@@ -1,5 +1,6 @@
 ---
 title: "Rust (part 2 of n): 'match' and Tuples"
+uuid: c444380d-4ebc-4c5f-b96c-20a49d1f631c
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

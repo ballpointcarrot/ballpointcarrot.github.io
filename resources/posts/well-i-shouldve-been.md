@@ -1,5 +1,6 @@
 ---
 title: "Well, I should've been paying attention"
+uuid: 23af2de1-1575-4ee9-a1e9-0240c1b1b170
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

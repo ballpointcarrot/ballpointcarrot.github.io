@@ -1,5 +1,6 @@
 ---
 title: Exploring Nixos
+uuid: f9bd8517-8c44-4eb9-aaed-28336d7eec60
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

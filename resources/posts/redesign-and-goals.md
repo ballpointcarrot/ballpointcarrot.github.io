@@ -1,5 +1,6 @@
 ---
 title: Redesign, and Goals
+uuid: 531f788f-771a-45d9-a044-0b9b38c830c4
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

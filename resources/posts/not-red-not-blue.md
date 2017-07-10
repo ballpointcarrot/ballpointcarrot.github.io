@@ -1,5 +1,6 @@
 ---
 title: Not Red, Not Blue
+uuid: 1af3afd9-47aa-4426-862c-36fb5a9d67eb
 draft: true
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net

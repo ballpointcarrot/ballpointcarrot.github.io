@@ -1,5 +1,6 @@
 ---
 title: "Rust, by a non-systems programmer (Part 1 of n)"
+uuid: 59d13391-c5dc-4a1a-be04-ddaa9429010c
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

@@ -1,5 +1,6 @@
 ---
 title: Tracking while you Gogo
+uuid: 77c34553-ad48-4109-9c71-5c3b004e816d
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

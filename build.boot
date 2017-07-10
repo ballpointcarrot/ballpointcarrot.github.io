@@ -61,12 +61,15 @@
    (markdown
      :md-exts {:smartypants true})
    (word-count)
-   (atom-feed)
-   (print-meta :filterer post?)
    (set-excerpts)
    (render :renderer 'net.ballpointcarrot.blog.views.post/render-post
            :filterer post?
-           :out-dir "public")
+           :out-dir "public")))
+
+(deftask build-collections
+  "Build collection pages for the blog."
+  []
+  (comp
    (collection :renderer 'net.ballpointcarrot.blog.views.index/render
                :sortby :date-created
            :filterer post?
@@ -87,6 +90,9 @@
   []
   (comp
    (build-dev)
+   (draft)
+   (atom-feed)
+   (build-collections)
    (sift :include #{#"public/"}
          :move {#"public/" ""})
    (target :dir #{"build"})))
@@ -98,4 +104,6 @@
    (watch)
    (build-dev)
    (draft)
+   (build-collections)
+   (atom-feed)
    (serve :resource-root "public")))

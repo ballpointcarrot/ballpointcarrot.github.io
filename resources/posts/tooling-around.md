@@ -1,3 +1,20 @@
+---
+title: Tooling Around
+uuid: 836ecc09-747c-4ddd-a704-26d0a20406bc
+author: Christopher Kruse
+author-email: ckruse@ballpointcarrot.net
+author-url: http://www.ballpointcarrot.net
+author-github: ballpointcarrot
+author-twitter: ballpointcarrot
+date-created: 2014-05-23
+in-language: en
+keywords: email, emacs, linux, osx
+canonical-url: http://www.ballpointcarrot.net/posts/tooling-around.html
+tags:
+ - email
+ - emacs
+ - linux
+---
 
 So, I traded in my work laptop today to replace it with a new one. I'm glad I made the switch, as there were things that
 I didn't need on the old one, and I didn't want to have to mess with a major upgrade path and the inevitable breaks that

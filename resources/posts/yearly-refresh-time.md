@@ -1,5 +1,6 @@
 ---
 title: "Yearly Refresh Time!"
+uuid: 562817a0-8399-4abb-b7c5-4ee3a119f36b
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net

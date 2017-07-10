@@ -1,5 +1,6 @@
 ---
 title: Learning a new Editor
+uuid: 38def8ab-7d71-4d60-91dc-61bc85eca570
 author: Christopher Kruse
 author-email: ckruse@ballpointcarrot.net
 author-url: http://www.ballpointcarrot.net
