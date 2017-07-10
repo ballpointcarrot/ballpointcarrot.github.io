@@ -1,61 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <!-- Document Settings -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Page Meta -->
-    <title>Ballpointcarrot.net</title>
-    <meta name="description" content="Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA." />
-
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- K: Need assets variable , or something like basepath -->
-
-    <!-- <link rel="shortcut icon" href="favicon.ico">-->
-
-    <!-- Styles'n'Scripts -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" /><!-- K: Need assets variable , or something like basepath -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css" />
-
-    <!-- Ghost outputs important style and meta data with this tag -->
-    <!-- {{ghost_head}} -->
-</head>
-<body class="post-template"><!-- K: body_class variable, home page class is home-template, post is like: post-template tag-getting-started -->
-
-    <!-- Everything else gets inserted here -->
-    
-        <main class="content" role="main">
-
-    <article class="post"><!-- K: {{post_class}}, tags- -->
-        <!-- Each post has the blog logo at the top, with a link back to the home page -->
-        <!-- Each post has the blog logo at the top, with a link back to the home page -->
-<header class="post-header">
-    <a class="blog-logo" href="/">
-        
-            <span class="blog-title">Ballpointcarrot.net</span>
-        
-    </a>
-</header>
-
-        <!-- Everything below outputs content of the the post which has been published -->
-        <span class="post-meta"><time datetime="Sun, 08 Mar 2015 08:00:00 GMT">8 Mar 2015</time> on rust,programming<!-- {{tags prefix="on " separator=" | "}} --></span>
-
-        <h1 class="post-title">Rust, by a non-systems programmer (Part 1 of n)</h1>
-
-        <section class="post-content">
-            <p>I&#39;ve been working on trying to teach myself Rust for the past 4 months or so. It&#39;s been slow-going, because I&#39;m having to
-teach myself things that would have been common knowledge for anyone with previous experience doing systems-level programming
-in C or C++. Instead, this will be more or less of a brain dump of a rubyist that is picking up some systems-level knowledge.</p>
-<h2>String I/O</h2><p>Coming from a scripting language like Ruby, basic string input and output is fairly straightforward:</p>
-<pre><code class="language-ruby">puts &quot;How old are you?&quot;
+<html><head><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA." name="description"><link href="/assets/css/screen.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic%7COpen+Sans:700,400" rel="stylesheet" type="text/css"><link href="/assets/css/prism.css" rel="stylesheet" type="text/css"></head><body class="post-template"><main class="content" role="main"><header class="post-header"><a class="blog-logo" href="http://www.ballpointcarrot.net/"><span class="blog-title">Ballpointcarrot.net</span></a></header><article class="post"><span class="post-meta"><date datetime="Sat, 7 Mar 2015">Sat, 7 Mar 2015</date><div class="tags"><a href="/tags/rust.html" style="padding: 0 0.5rem 0 0;">rust</a><a href="/tags/Programming.html" style="padding: 0 0.5rem 0 0;">Programming</a></div></span><h1 class="post-title">Rust, by a non-systems programmer (Part 1 of n)</h1><section class="post-content"><p>I&rsquo;ve been working on trying to teach myself Rust for the past 4 months or so. It&rsquo;s been slow-going, because I&rsquo;m having to teach myself things that would have been common knowledge for anyone with previous experience doing systems-level programming in C or C++. Instead, this will be more or less of a brain dump of a rubyist that is picking up some systems-level knowledge.</p>
+<h2><a href="#string-io" id="string-io"></a>String I/O</h2>
+<p>Coming from a scripting language like Ruby, basic string input and output is fairly straightforward:</p>
+<pre><code class="language-lang-ruby">puts &quot;How old are you?&quot;
 age = gets.strip
-puts &quot;You&#39;ve said #{age} years, which is #{(age.to_i*365.25).to_i} days.&quot;
+puts &quot;You've said #{age} years, which is #{(age.to_i*365.25).to_i} days.&quot;
 </code></pre>
 <p>In Rust, this becomes significantly more involved:</p>
-<pre><code class="language-rust">#![feature(old_io)]
+<pre><code class="language-lang-rust">#![feature(old_io)]
 use std::old_io::stdin;
 use std::str::FromStr;
 
@@ -63,59 +15,43 @@ fn main() {
     println!(&quot;How old are you?&quot;);
     let mut input = match stdin().read_line() {
         Ok(v) =&gt; v,
-        Err(_) =&gt; panic!(&quot;Couldn&#39;t get STDIN!&quot;)
+        Err(_) =&gt; panic!(&quot;Couldn't get STDIN!&quot;)
     };
     input = input.trim()
     let age_days:usize = match FromStr::from_str(input.trim()) {
         Ok(v) =&gt; (v * 365.25) as usize,
-        Err(_) =&gt; panic!(&quot;Couldn&#39;t convert to usize!&quot;)
+        Err(_) =&gt; panic!(&quot;Couldn't convert to usize!&quot;)
     };
 
-    println!(&quot;You&#39;ve said {} years, which is {} days&quot;, input.trim(), age_days)
+    println!(&quot;You've said {} years, which is {} days&quot;, input.trim(), age_days)
 }
 </code></pre>
-<p>In Rust, the placement of the variable in stack or heap memory is important to the Rust compiler&#39;s understanding of</p>
+<p>In Rust, the placement of the variable in stack or heap memory is important to the Rust compiler&rsquo;s understanding of</p>
 <ul>
-<li>how long the variable lives (it&#39;s &quot;lifetime&quot;), and</li>
-<li>who owns the memory that the variable uses (the &quot;ownership&quot;).</li>
+<li>how long the variable lives (it&rsquo;s &ldquo;lifetime&rdquo;), and</li>
+<li>who owns the memory that the variable uses (the &ldquo;ownership&rdquo;).</li>
 </ul>
-<p>There are <a href="https://doc.rust-lang.org/book/ownership.html">plenty</a> 
-<a href="http://rustbyexample.com/move.html">of</a> 
-<a href="https://doc.rust-lang.org/book/strings.html">posts</a>
-<a href="http://nercury.github.io/rust/guide/2015/01/19/ownership.html">available</a>
-which will explain these terms to enough detail; for practical purposes, we have to manage two separate types of strings. 
-Each type gets used in subtly different ways, but will cause you some problems when building out programs. </p>
-<p>The more commonly used string type is <code>&amp;str</code>, also known as the &quot;string slice&quot;. This string is allocated to the stack, and
-is accessed through a reference to the stored string, much like a C-like character array.</p>
-<p>The second string type, <code>String</code>, is used when you want to maintain ownership over the string value. <code>String</code>s are allocated on the heap, and
-are &quot;growable&quot; - that is, they can be added to as mutable variables. </p>
-<p>Be careful to understand what type of string you&#39;ll be dealing with; functions generally operate on the more general <code>&amp;str</code> type,
-so you may need to convert back and forth between the two types with <code>String::as\_slice</code> or <code>&quot;&quot;.to\_string()</code>.</p>
-<h3>Handling input possibilities</h3><p>Because Rust does not have a built-in concept of &quot;null&quot;, you cannot assign a non-guaranteed value to a variable. Instead,
-Rust provides the Result type, which wraps the successful value in an <code>Ok()</code>-wrapped response; otherwise, an error will be 
-provided with the relevant error details. </p>
-<p>This means that reads from <code>STDIN</code> will be quite a bit more verbose than you&#39;re used to,
-but the compiler now forces the checking of invalid situations for a value, which can take more off of your mind.</p>
-<h3>Changing I/O Library</h3><p>One of the last changes to the Rust Standard Library was an overhaul of the IO subsystem. Most documentation (including the 
-official docs) request that you continue to use <code>std::old_io</code> until the overhaul is complete.</p>
-<h2>Memory Management</h2><p>One of the larges differences between the two languages is the presence/absence of a Garbage Collector. In Ruby (and other GC&#39;d
-languages), the GC is used to clean up expired references from the runtime, to periodically free unused memory from the 
-application being run.</p>
-<p>In Rust, there is no GC. Instead, the compiler has a notion of &quot;ownership,&quot; as we discussed earlier. Check out the following 
-snippet:</p>
-<pre><code class="language-rust">    let x = Box::new(5);
+<p>There are <a href="https://doc.rust-lang.org/book/ownership.html">plenty</a> <a href="http://rustbyexample.com/move.html">of</a> <a href="https://doc.rust-lang.org/book/strings.html">posts</a> <a href="http://nercury.github.io/rust/guide/2015/01/19/ownership.html">available</a> which will explain these terms to enough detail; for practical purposes, we have to manage two separate types of strings. Each type gets used in subtly different ways, but will cause you some problems when building out programs.</p>
+<p>The more commonly used string type is <code>&amp;str</code>, also known as the &ldquo;string slice&rdquo;. This string is allocated to the stack, and is accessed through a reference to the stored string, much like a C-like character array.</p>
+<p>The second string type, <code>String</code>, is used when you want to maintain ownership over the string value. <code>String</code>s are allocated on the heap, and are &ldquo;growable&rdquo; - that is, they can be added to as mutable variables.</p>
+<p>Be careful to understand what type of string you&rsquo;ll be dealing with; functions generally operate on the more general <code>&amp;str</code> type, so you may need to convert back and forth between the two types with <code>String::as_slice</code> or <code>&quot;&quot;.to_string()</code>.</p>
+<h3><a href="#handling-input-possibilities" id="handling-input-possibilities"></a>Handling input possibilities</h3>
+<p>Because Rust does not have a built-in concept of &ldquo;null&rdquo;, you cannot assign a non-guaranteed value to a variable. Instead, Rust provides the Result type, which wraps the successful value in an <code>Ok()</code>-wrapped response; otherwise, an error will be provided with the relevant error details.</p>
+<p>This means that reads from <code>STDIN</code> will be quite a bit more verbose than you&rsquo;re used to, but the compiler now forces the checking of invalid situations for a value, which can take more off of your mind.</p>
+<h3><a href="#changing-io-library" id="changing-io-library"></a>Changing I/O Library</h3>
+<p>One of the last changes to the Rust Standard Library was an overhaul of the IO subsystem. Most documentation (including the official docs) request that you continue to use <code>std::old_io</code> until the overhaul is complete.</p>
+<h2><a href="#memory-management" id="memory-management"></a>Memory Management</h2>
+<p>One of the larges differences between the two languages is the presence/absence of a Garbage Collector. In Ruby (and other GC&rsquo;d languages), the GC is used to clean up expired references from the runtime, to periodically free unused memory from the application being run.</p>
+<p>In Rust, there is no GC. Instead, the compiler has a notion of &ldquo;ownership,&rdquo; as we discussed earlier. Check out the following snippet:</p>
+<pre><code class="language-lang-rust">    let x = Box::new(5);
     {   
         let y = x;
     }   
 
-    println!(&quot;x == {}&quot;, x);
+    println!(&quot;x == {}&quot;, x); 
 </code></pre>
-<p>In line 1, we create a new heap-allocated variable, and store 5 into it. Because it&#39;s on the heap, the value of x is really
-a pointer to the memory location of the &quot;Box&quot; - the owned variable. Now, in line 3, we create the variable y, and store x&#39;s value 
-into it; this is considered by the Rust compiler to be a &quot;move&quot; - both pointers point to the data, but rust treats y as the 
-new owner of the Box, as x has transferred ownership. Because of this, line 6 fails to compile correctly, as the value owner 
-has been moved:</p>
-<pre><code class="language-plaintext">src/main.rs:7:25: 7:26 error: use of moved value: `x`
+<p>In line 1, we create a new heap-allocated variable, and store 5 into it. Because it&rsquo;s on the heap, the value of x is really a pointer to the memory location of the &ldquo;Box&rdquo; - the owned variable. Now, in line 3, we create the variable y, and store x&rsquo;s value into it; this is considered by the Rust compiler to be a &ldquo;move&rdquo; - both pointers point to the data, but rust treats y as the new owner of the Box, as x has transferred ownership. Because of this, line 6 fails to compile correctly, as the value owner has been moved:</p>
+<pre><code class="language-lang-plaintext">src/main.rs:7:25: 7:26 error: use of moved value: `x`
 src/main.rs:7     println!(&quot;x == {}&quot;, x);
                                       ^
 note: in expansion of format_args!
@@ -128,65 +64,8 @@ src/main.rs:4         let y = x;
 src/main.rs:4:14: 4:14 help: use `ref` to override
 error: aborting due to previous error
 </code></pre>
-<p>Because of this, you need to keep track of what values you&#39;re using where, who&#39;s got the ownership of the value, and how long 
-the value is alive. </p>
-<h2>Documentation!</h2><p>This will be something that comes with more use and more exposure, but right now, outside of the <a href="http://doc.rust-lang.org/">Rust standard documentation</a>, there
-isn&#39;t much for explanations on how/where to do things is, in comparison to the Ruby ecosystem on the Internet. As I get more
-into it, I&#39;m hoping to have more posts like this, where I can go into greater detail on how to do things in a rust-like way.</p>
-<p>Moving into Systems programming is weird for me; I know there&#39;s some things that I&#39;m missing, and I have a lot more power to 
-play around with the system at a lower level, but I struggle with finding projects to work on. Either I choose something 
-substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&#39;d like to put 
-together something in the middle soon.</p>
-        </section>
-
-        <footer class="post-footer">
-
-            
-                <section class="author">
-                    <h4>Christopher Kruse</h4>
-                    <p>AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns.</p>
-                </section>
-            
-
-            <section class="share">
-                <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Rust, by a non-systems programmer (Part 1 of n)&url=/rust-non-systems-programmer"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/rust-non-systems-programmer"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/rust-non-systems-programmer"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-
-        </footer>
-
-    </article>
-
-</main>
-    
-
-    <footer class="site-footer">
-    <a class="subscribe icon-feed" href="/rss/index.xml"><span class="tooltip">Subscribe!</span></a>
-    <div class="inner">
-         <section class="copyright">All content copyright <a href="/">ballpointcarrot.net</a> &copy; 2017 &bull; All rights reserved.</section>
-         <section class="poweredby">Proudly published with <a class="" href="http://harpjs.com">Harp</a></section>
-    </div>
-</footer>
-
-    <!-- Ghost outputs important scripts and data with this tag -->
-    <!-- {{ghost_foot}} -->
-
-    <!-- The main JavaScript file for Casper -->
-    <script type="text/javascript" src="/assets/js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
-    <script type="text/javascript" src="/assets/js/index.js"></script>
-    <script type="text/javascript" src="/assets/js/prism.js"></script>
-
-</body>
-</html>
+<p>Because of this, you need to keep track of what values you&rsquo;re using where, who&rsquo;s got the ownership of the value, and how long the value is alive.</p>
+<h2><a href="#documentation" id="documentation"></a>Documentation!</h2>
+<p>This will be something that comes with more use and more exposure, but right now, outside of the <a href="http://doc.rust-lang.org/">Rust standard documentation</a>, there isn&rsquo;t much for explanations on how/where to do things is, in comparison to the Ruby ecosystem on the Internet. As I get more into it, I&rsquo;m hoping to have more posts like this, where I can go into greater detail on how to do things in a rust-like way.</p>
+<p>Moving into Systems programming is weird for me; I know there&rsquo;s some things that I&rsquo;m missing, and I have a lot more power to play around with the system at a lower level, but I struggle with finding projects to work on. Either I choose something substantially big, or it ends up being examples on <a href="http://reddit.com/r/dailyprogrammer">/r/dailyprogrammer</a>. I&rsquo;d like to put together something in the middle soon.</p>
+</section><footer class="post-footer"><section class="author"><h4>Christopher Kruse</h4><p>AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns.</p></section><section class="share"><span class="share-twitter"><h4>Share this post</h4><a class="icon-twitter" href="https://twitter.com/share?text=&amp;url=http://www.ballpointcarrot.net/posts/rust-non-systems-programmer.html" onclick=="window.open(this.href, &apos;twitter-share&apos;, &apos;width=550,height=235&apos;);return false;"></a><span class="hidden">Twitter</span></span><span class="share-fb"><a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.ballpointcarrot.net/posts/rust-non-systems-programmer.html" onclick="window.open(this.href, &apos;facebook-share&apos;,&apos;width=580,height=296&apos;);return false;"></a><span class="hidden">Facebook</span></span><span class="share-reddit"><a class="icon-reddit" href="" onclick=""></a><span class="hidden">Reddit</span></span></section></footer></article></main><footer class="site-footer"><a class="subscribe icon-feed" href="http://www.ballpointcarrot.net/atom.xml"><span class="tooltip">Subscribe!</span></a><div class="inner"><section class="copyright">All content copyright <a href="http://www.ballpointcarrot.net/">Ballpointcarrot.net</a> &copy; 2017 &bull; All rights reserved.</section></div></footer><script src="/assets/js/index.js" type="text/javascript"></script><script src="/assets/js/prism.js" type="text/javascript"></script></body></html>
