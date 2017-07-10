@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA." name="description"><link href="/assets/css/screen.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic%7COpen+Sans:700,400" rel="stylesheet" type="text/css"><link href="/assets/css/prism.css" rel="stylesheet" type="text/css"></head><body class="post-template"><main class="content" role="main"><header class="post-header"><a class="blog-logo" href="http://www.ballpointcarrot.net/"><span class="blog-title">Ballpointcarrot.net</span></a></header><article class="post"><span class="post-meta"><date datetime="Sun, 8 Jan 2017">Sun, 8 Jan 2017</date><div class="tags"><a href="/tags/airplanes.html" style="padding: 0 0.5rem 0 0;">airplanes</a><a href="/tags/Programming.html" style="padding: 0 0.5rem 0 0;">Programming</a><a href="/tags/fun.html" style="padding: 0 0.5rem 0 0;">fun</a></div></span><h1 class="post-title">Tracking while you Gogo</h1><section class="post-content"><p>I&rsquo;m flying a lot more as part of my current job. As I write this, I&rsquo;m on a flight from Seattle to Salt Lake City (first of a connection). I enjoy the fact that I can connect to the internet while going over 500 MPH at nearly 30,000 feet in the air - it&rsquo;s a wonder of science that I can do these things.</p>
+<p>However, sometimes the cost of getting the in-flight internet is a little over-the-top. Most of the time, I&rsquo;ll connect to the hotspot, but then use my laptop offline (http://devdocs.io offline mode is perfect for this).</p>
+<hr />
+<p>On one of my last flights, though, I wanted to see just what I had access to. On Delta flights, there&rsquo;s a flight status tracker on the web portal during the flight, which provides details about how the flight is going, times to arrival, and other flight data. A data nerd by nature, this is something I want, and normally pull up on the seat-back entertainment system (instead of watching a movie like a normal human being.)</p>
+<p>So, I chose to dive in to the Gogo portal to see what was possible. A quick look at the dev console in Chrome shows how the flight data page loads:</p>
+<p><img src="/assets/img/delta-gogo-chrome-devtools.png" alt="Chrome tools" /></p>
+<p>To my delight, not only do we have JSON requests for data, but they&rsquo;re straightforward, easy to parse GET requests (easier to deal with than POSTs). To see how these are requested, I ran a quick <code>dig</code> call against each of the FQDNs that were presented.</p>
+<pre><code class="language-plain">Dig responses:
+airborne.gogoinflight.com: 10.241.xxx.xxx
+utils.gogoinflight.com: 10.241.xxx.xxx
+d.sda.gogoinflight.com: -&gt; gogoair-d3.openxenterprise.com -&gt; 173.241.xxx.xxx
+fig.gogoinflight.com:
+        10.246.118.xxx
+        10.246.119.xxx
+        10.246.120.xxx
+</code></pre>
+<p>Everything is in private class addressing space, meaning all of this routes internally within Gogo&rsquo;s network. Meaning, we should be able to make these requests both inside and outside of the browser.</p>
+<p>The first we&rsquo;ll look at, &ldquo;statusTray&rdquo;, doesn&rsquo;t even need any parameters: <code>curl http://airborne.gogoinflight.com/abp/ws/absServices/statusTray</code> gives me a straight JSON output of random details, including (amusingly) &ldquo;gogoFacts&rdquo;, a random fact that Gogo provides as interesting info (and a little bit of advertisement).</p>
+<pre><code class="language-javascript">{
+   &quot;Response&quot; : {
+      &quot;serviceInfo&quot; : {
+         &quot;service&quot; : &quot;Inactive&quot;,
+         &quot;remaining&quot; : 0
+      },
+      &quot;status&quot; : 200,
+      &quot;gogoFacts&quot; : &quot;The world record for the longest Wi-Fi connection is&quot; +
+      &quot;237 miles, held by Ermanno Pietrosemoli of Venezuela, who transferred&quot;+ 
+      &quot;about 3 MB of data between the mountaintops of El Aguila and Platillon.&quot;,
+      &quot;flightInfo&quot; : {
+         &quot;tailNumber&quot; : &quot;N3753&quot;,
+         &quot;HSpeed&quot; : 576.4907,
+         &quot;longitude&quot; : -119,
+         &quot;utcTime&quot; : &quot;2017-01-09T18:36:18.583Z&quot;,
+         &quot;expectedArrival&quot; : &quot;2017-01-09T19:34:14Z&quot;,
+         &quot;airlineCode&quot; : &quot;DAL&quot;,
+         &quot;acpuVersion&quot; : &quot;10.4.0&quot;,
+         &quot;altitude&quot; : 33882.277,
+         &quot;flightNumberInfo&quot; : &quot;DAL1319&quot;,
+         &quot;latitude&quot; : 45.37,
+         &quot;videoService&quot; : false,
+         &quot;abpVersion&quot; : &quot;7.0.1&quot;,
+         &quot;departureAirportCode&quot; : &quot;KSEA&quot;,
+         &quot;destinationAirportCode&quot; : &quot;KSLC&quot;,
+         &quot;VSpeed&quot; : 0.6136283
+      }
+   }
+}
+</code></pre>
+<blockquote>
+<p>Interestingly enough, this response was different on my flight today vs. the flight last week I played around with these requests. Your response(s) may be different. For instance, my new flight only responded with ICAO airport codes, and no IATA (3-letter) codes. The second request can use either, from what I can tell.</p>
+</blockquote>
+<p>Based on this output, we can use a number of these values to craft the request for the &ldquo;flightStatusByLeg&rdquo; request:</p>
+<pre><code class="language-ruby">&quot;http://utils.gogoinflight.com/flightService/flightStatusByLeg?&quot;+
+&quot;flightNum=#{data[&quot;Response&quot;][&quot;flightInfo&quot;][&quot;flightNumberInfo&quot;]}&quot;+
+&quot;&amp;depDate=#{Time.now.strftime(&quot;%Y-%m-%d&quot;)}&quot;+
+&quot;&amp;originCode=#{data[&quot;Response&quot;][&quot;flightInfo&quot;][&quot;departureAirportCode&quot;]}&quot;+
+&quot;&amp;destCode=#{data[&quot;Response&quot;][&quot;flightInfo&quot;][&quot;destinationAirportCode&quot;]}&quot;
+</code></pre>
+<p>This request comes back as JSONP, or a JSON block wrapped in an executable function (a common method of executing code on callback in an AJAX request). If you&rsquo;re parsing it as JSON, you&rsquo;ll have to remove the function call before parsing:</p>
+<pre><code class="language-ruby">data2json = JSON.parse(data2.gsub!(&quot;DLFSCallback (&quot;,&quot;&quot;).gsub!(/\);$/, &quot;&quot;))
+</code></pre>
+<p>This data set is much larger; mostly, because it gives you a sequenced point-to-point data stream of latitude, longitude, ground speed, and altitude! This data could be plotted and graphed in any way you see fit (my goal for next flight is to tie it to D3.js to plot my flight status :D).</p>
+<pre><code class="language-javascript">{
+   &quot;flightStatusResponse&quot; : {
+      &quot;flightStatusByLegResponse&quot; : {
+         &quot;flightStatusTO&quot; : {
+            &quot;flightOriginDate&quot; : &quot;2017-01-09T00:00:00.001-05:00&quot;,
+            &quot;flightNumber&quot; : &quot;1319&quot;,
+            &quot;changeOfAircraft&quot; : &quot;false&quot;,
+            &quot;flightPositionTO&quot; : {
+               &quot;altitude&quot; : &quot;37000&quot;,
+               &quot;inFlightTimeMinutes&quot; : &quot;55&quot;,
+               &quot;actualPositions&quot; : [
+                  {
+                     &quot;timeOver&quot; : &quot;0&quot;,
+                     &quot;sequence&quot; : &quot;1&quot;,
+                     &quot;latitude&quot; : &quot;47.4488&quot;,
+                     &quot;groundSpeed&quot; : &quot;0&quot;,
+                     &quot;longitude&quot; : &quot;-122.30944&quot;,
+                     &quot;altitude&quot; : &quot;433&quot;
+                  },
+                  {
+                     &quot;groundSpeed&quot; : &quot;0&quot;,
+                     &quot;latitude&quot; : &quot;47.4462&quot;,
+                     &quot;sequence&quot; : &quot;2&quot;,
+                     &quot;timeOver&quot; : &quot;1483985273&quot;,
+                     &quot;longitude&quot; : &quot;-122.3081&quot;,
+                     &quot;altitude&quot; : &quot;300&quot;
+                  },
+                  {
+                     &quot;longitude&quot; : &quot;-122.3082&quot;,
+                     &quot;altitude&quot; : &quot;1700&quot;,
+                     &quot;latitude&quot; : &quot;47.424&quot;,
+                     &quot;groundSpeed&quot; : &quot;0&quot;,
+                     &quot;timeOver&quot; : &quot;1483985303&quot;,
+                     &quot;sequence&quot; : &quot;3&quot;
+                  },
+                  {
+                     &quot;altitude&quot; : &quot;1800&quot;,
+                     &quot;longitude&quot; : &quot;-122.3072&quot;,
+                     &quot;groundSpeed&quot; : &quot;187&quot;,
+                     &quot;latitude&quot; : &quot;47.42333&quot;,
+                     &quot;timeOver&quot; : &quot;1483985305&quot;,
+                     &quot;sequence&quot; : &quot;4&quot;
+                  },
+                  //...
+</code></pre>
+<p>Anyway, this is all retrievable without paying for the Gogo wifi; just a way to keep you entertained during the flight.</p>
+</section><footer class="post-footer"><section class="author"><h4>Christopher Kruse</h4><p>AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns.</p></section><section class="share"><span class="share-twitter"><h4>Share this post</h4><a class="icon-twitter" href="https://twitter.com/share?text=&amp;url=http://www.ballpointcarrot.net/posts/tracking-while-you-gogo.html" onclick=="window.open(this.href, &apos;twitter-share&apos;, &apos;width=550,height=235&apos;);return false;"></a><span class="hidden">Twitter</span></span><span class="share-fb"><a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.ballpointcarrot.net/posts/tracking-while-you-gogo.html" onclick="window.open(this.href, &apos;facebook-share&apos;,&apos;width=580,height=296&apos;);return false;"></a><span class="hidden">Facebook</span></span><span class="share-reddit"><a class="icon-reddit" href="" onclick=""></a><span class="hidden">Reddit</span></span></section></footer></article></main><footer class="site-footer"><a class="subscribe icon-feed" href="http://www.ballpointcarrot.net/atom.xml"><span class="tooltip">Subscribe!</span></a><div class="inner"><section class="copyright">All content copyright <a href="http://www.ballpointcarrot.net/">Ballpointcarrot.net</a> &copy; 2017 &bull; All rights reserved.</section></div></footer><script src="/assets/js/index.js" type="text/javascript"></script><script src="/assets/js/prism.js" type="text/javascript"></script></body></html>

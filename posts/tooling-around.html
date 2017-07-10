@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="Thoughts and ramblings of Christopher Kruse, a software engineer based in Seattle, WA." name="description"><link href="/assets/css/screen.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic%7COpen+Sans:700,400" rel="stylesheet" type="text/css"><link href="/assets/css/prism.css" rel="stylesheet" type="text/css"></head><body class="post-template"><main class="content" role="main"><header class="post-header"><a class="blog-logo" href="http://www.ballpointcarrot.net/"><span class="blog-title">Ballpointcarrot.net</span></a></header><article class="post"><span class="post-meta"><date datetime="Thu, 22 May 2014">Thu, 22 May 2014</date><div class="tags"><a href="/tags/email.html" style="padding: 0 0.5rem 0 0;">email</a><a href="/tags/emacs.html" style="padding: 0 0.5rem 0 0;">emacs</a><a href="/tags/linux.html" style="padding: 0 0.5rem 0 0;">linux</a></div></span><h1 class="post-title">Tooling Around</h1><section class="post-content"><p>So, I traded in my work laptop today to replace it with a new one. I&rsquo;m glad I made the switch, as there were things that I didn&rsquo;t need on the old one, and I didn&rsquo;t want to have to mess with a major upgrade path and the inevitable breaks that were to come with it. Additionally, my workflow and suite of tools works better with the new hardware (I&rsquo;ve switched to an Ubuntu laptop from an OSX one), and it will centralize my daily work (email and communication, scheduling and planning) around the laptop instead of the desktop, which can then be devoted to other tasks (like running development projects).</p>
+<p>Because of the switch, it got me to thinking about the tooling that I use on a daily basis, and how to most smoothly move into getting that installed on a new system. Replacing hardware is tough work for a developer/engineer, and that would be time otherwise spent working on problems or creating new things. I&rsquo;m going to provide a rundown of my toolchain and how I orchestrate the installation of the tools.</p>
+<p>Note that, as this is tied to Linux, the tools will obviously be Linux-based. There are different flows for other OSs; each ecosystem operates differently. This is my solution for myself; YMMV.</p>
+<h2><a href="#communication" id="communication"></a>Communication</h2>
+<p>Being able to send and receive messages is key. Ten minutes after receiving my laptop today, I had a meeting that I had to run to, and to send an email containing some details to one of the attendees. I run my email from the office Exchange server to my desktop (and now the laptop) using <a href="http://fetchmail.berlios.de/">fetchmail</a> and <a href="http://www.procmail.org/">procmail</a>. While these may seem esoteric, and not terribly user-friendly, it gives me a strength that no other email client has - I can run scripts around my email. Procmail handles the filtering of the incoming fetchmail setup, and separates the email into the various folders for easy filtering rules (based on sender, topic in subject, etc.). Emails sent specifically to me in the To: header get a bit more prevalence, and emails with calendar invites as attachments get the attachment parsed and sent to a calendar. Since everything was using a standard Maildir format for storage on the laptop, migrating the email was as easy as running rsync between the two systems.</p>
+<p>This covers only the receipt of email, not sending. Since December (referencing <a href="http://www.ballpointcarrot.net/blog/2014/02/07/learning-a-new-editor/">an earlier post</a>), I&rsquo;ve been using Emacs to do more and more things - this has grown to include IRC chat (via the <a href="http://www.emacswiki.org/wiki/ERC">ERC</a> plugin) and email (using a pair of utilities called <a href="http://www.djcbsoftware.nl/code/mu/mu4e.html">mu and mu4e</a>). While normally I&rsquo;d entertain jokes here (like &ldquo;emacs is a good OS, it just needs a decent text editor.&rdquo;), I have to say that it&rsquo;s handy to have a single place to go for all the work you need to do. mu is external to Emacs, and is a search engine over your Maildir folders; you can use it on the command line to pick out emails that pertain to certain topics, and filter them by specific recipients and whether they&rsquo;re new/flagged/unread/etc. Mu4e wraps that logic in an easy to use mail client from within Emacs, and it&rsquo;s been much nicer than sifting through Outlook.</p>
+<h2><a href="#environment" id="environment"></a>Environment</h2>
+<p>So I&rsquo;ve got some software&hellip; now I have to customize what I run it in. Rather than stay with Unity (the default Ubuntu installed WM, which I frankly feel is counter-intuitive), I choose to go to a lesser known window manager called <a href="http://awesome.naquadah.org/">&ldquo;Awesome.&rdquo;</a> Appropriately named, as I haven&rsquo;t left it since I found it. By using a tiling window manager, I don&rsquo;t have to worry about resizing things to fit. Additionally, the entire interface is programmable via Lua, so defining custom shortcut keys and startup programs is fairly simple:</p>
+<pre><code class="language-lua">    -- ...
+    -- Hotkeys for handling window resizing and management:
+    clientkeys = awful.util.table.join(
+    awful.key({ modkey,           }, &quot;f&quot;,      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, &quot;q&quot;,      function (c) c:kill()                         end),
+    awful.key({ modkey, &quot;Control&quot; }, &quot;space&quot;,  awful.client.floating.toggle                     ),
+    awful.key({ modkey, &quot;Control&quot; }, &quot;Return&quot;, function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey,           }, &quot;o&quot;,      awful.client.movetoscreen                        ),
+    awful.key({ modkey, &quot;Shift&quot;   }, &quot;r&quot;,      function (c) c:redraw()                       end),
+    awful.key({ modkey,           }, &quot;t&quot;,      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, &quot;n&quot;,
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end),
+    awful.key({ modkey,           }, &quot;m&quot;,
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+        end)
+    )
+    -- Autostarts
+    awful.util.spawn_with_shell(&quot;/usr/bin/startup-script.sh&quot;)
+    awful.util.spawn_with_shell(&quot;~/bin/runme&quot;)
+</code></pre>
+<p>Awesome&rsquo;s libraries have amusing names: &ldquo;awful&rdquo;, &ldquo;naughty&rdquo;, and &ldquo;vicious&rdquo;, to name a few. Currently, I have this attached to the GNOME session layer, so I get the benefit of GNOME&rsquo;s background and icon management, but the window management of awesome.</p>
+<h2><a href="#code" id="code"></a>Code</h2>
+<p>A programmer can&rsquo;t do much unless he has languages to write in. For me, that means having to add some additional packages:</p>
+<ul>
+<li>
+<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> - this manages various installations of Ruby and the ecosystem around it. Similar to RVM, this uses shim binaries to point to rotating Ruby versions, so that I can use one version with one app, and use a legacy version to work on an older one.</p>
+</li>
+<li>
+<p><a href="https://github.com/creationix/nvm">nvm</a> - Same idea as rbenv, but for node.js. These libraries give me the flexibility of using different runtimes for different applications, and makes it easier to install the languages than with the system-provided binaries (which can either be out of date or harder to manage).</p>
+</li>
+<li>
+<p>I&rsquo;ve already mentioned it, but Emacs is in here, too. Being able to easily see language and typographical issues with flycheck, syntax highlighting for languages available via <a href="https://github.com/dimitri/el-get">el-get</a>, and being able to launch a simple shell within the editor to run a test is a blessing to getting things done.</p>
+</li>
+</ul>
+<h2><a href="#tomorrow" id="tomorrow"></a>Tomorrow</h2>
+<p>This was just for the first day, too. Things like browser plugins (which we use a myriad of for work) will likely come soon enough, and there will be tweaks to all of the stuff listed as what I need in the environment changes. Let me know if you have any questions on any of this, and I&rsquo;ll do what I can to answer them.</p>
+</section><footer class="post-footer"><section class="author"><h4>Christopher Kruse</h4><p>AWS Engineer, puzzle/board game addict, choir singer, and a teller of terrible puns.</p></section><section class="share"><span class="share-twitter"><h4>Share this post</h4><a class="icon-twitter" href="https://twitter.com/share?text=&amp;url=http://www.ballpointcarrot.net/posts/tooling-around.html" onclick=="window.open(this.href, &apos;twitter-share&apos;, &apos;width=550,height=235&apos;);return false;"></a><span class="hidden">Twitter</span></span><span class="share-fb"><a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.ballpointcarrot.net/posts/tooling-around.html" onclick="window.open(this.href, &apos;facebook-share&apos;,&apos;width=580,height=296&apos;);return false;"></a><span class="hidden">Facebook</span></span><span class="share-reddit"><a class="icon-reddit" href="" onclick=""></a><span class="hidden">Reddit</span></span></section></footer></article></main><footer class="site-footer"><a class="subscribe icon-feed" href="http://www.ballpointcarrot.net/atom.xml"><span class="tooltip">Subscribe!</span></a><div class="inner"><section class="copyright">All content copyright <a href="http://www.ballpointcarrot.net/">Ballpointcarrot.net</a> &copy; 2017 &bull; All rights reserved.</section></div></footer><script src="/assets/js/index.js" type="text/javascript"></script><script src="/assets/js/prism.js" type="text/javascript"></script></body></html>
