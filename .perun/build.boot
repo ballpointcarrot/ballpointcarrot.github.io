@@ -49,8 +49,8 @@
     (let [_meta (pm/get-meta fileset)
           with-excerpts (map (fn [post]
                                (assoc post :excerpt (post-excerpt post))) _meta)]
-      (pm/set-meta 
-        fileset 
+      (pm/set-meta
+        fileset
         with-excerpts))))
 
 (deftask build-dev
@@ -91,7 +91,7 @@
   (comp
    (build-dev)
    (draft)
-   (atom-feed)
+   (atom-feed :page-size 100)
    (build-collections)
    (sift :include #{#"public/"}
          :move {#"public/" ""})
@@ -104,6 +104,6 @@
    (watch)
    (build-dev)
    (draft)
+   (atom-feed :page-size 100)
    (build-collections)
-   (atom-feed)
    (serve :resource-root "public")))

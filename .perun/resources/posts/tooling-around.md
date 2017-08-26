@@ -7,6 +7,7 @@ author-url: http://www.ballpointcarrot.net
 author-github: ballpointcarrot
 author-twitter: ballpointcarrot
 date-created: 2014-05-23
+date-published: 2014-05-23
 in-language: en
 keywords: email, emacs, linux, osx
 canonical-url: http://www.ballpointcarrot.net/posts/tooling-around.html
