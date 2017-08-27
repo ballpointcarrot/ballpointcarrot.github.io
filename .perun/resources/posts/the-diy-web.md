@@ -25,6 +25,7 @@ One of the more controversial decisions I've made for myself in the past few yea
 was to take myself off of the Facebook platform. While this makes it far harder for
 friends and family to scout me out on the Internet as a whole, I had reservations
 about using their platform, and ultimately deactivated my account in early 2011. The reason for this mostly stems out of two main points:
+
  - The first takes us way back to April of 2010. Back then, Facebook
  [introduced a change](http://lifehacker.com/5549394/how-to-return-facebook-privacy-settings-to-what-you-signed-up-for)
 to their platform; as a result, all users' permissions defaulted to be [public by default](https://www.wired.com/2010/05/facebook-rogue/). This
@@ -52,6 +53,7 @@ one point of access. When that access is cut off or limited (think of Github out
 been dubbed "developer holidays" based on their impact to the tech community), it can be disruptive
 to a large amount of people. In addition, by selecting one route to access for these services,
 the companies that run them can start to dictate consumption:
+
  - Twitter heavily limits access for third-party phone apps into the platform
  - Snapchat doesn't provide a Windows Phone app, but [requested Microsoft pull third-party apps](http://www.pcworld.com/article/2862088/snapchat-cracks-down-on-windows-phone-imitator-apps.html) providing
    that functionality from their app store
@@ -98,6 +100,7 @@ result of the needs around these platforms, all while retaining the social aspec
 Email is exactly this. Not everyone has (or even wants, in cases) a Gmail account. There is no absolute requirement that
 your email go to Yahoo/Hotmail/Gmail/etc. - Running an email server is something you can do for your self, your household,
 your extended family. The requirements are straightforward:
+
  - Set up the software to receive the email.
  - Set up the accounts to have the mail delivered to.
  - Tell everyone how to get their email (configure the clients).
