@@ -52,9 +52,9 @@
    [:div.inner.h-card
     [:div "I'm " [:span.p-name "Christopher Kruse"] "."]
     [:ul.web-identity
-     [:li [:a {:rel "me" :href "https://twitter.com/ballpointcarrot" :target "_blank"} "Twitter"]]
-     [:li [:a {:rel "me" :href "https://social.ballpointcarrot.net/@ballpointcarrot" :target "_blank"} "Mastodon"]]
-     [:li [:a {:rel "me" :href "https://github.com/ballpointcarrot" :target "_blank"} "Github"]]
+     [:li [:a.u-url {:rel "me" :href "https://twitter.com/ballpointcarrot" :target "_blank"} "Twitter"]]
+     [:li [:a.u-url {:rel "me" :href "https://social.ballpointcarrot.net/@ballpointcarrot" :target "_blank"} "Mastodon"]]
+     [:li [:a.u-url {:rel "me" :href "https://github.com/ballpointcarrot" :target "_blank"} "Github"]]
      [:li [:a {:class "u-email" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]]]]
    [:div.inner
     [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]])
