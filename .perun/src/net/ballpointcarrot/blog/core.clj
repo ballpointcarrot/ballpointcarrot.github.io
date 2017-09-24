@@ -52,8 +52,8 @@
    [:div.inner
     [:ul.web-identity
      [:li [:a {:rel "me" :href "https://twitter.com/ballpointcarrot" :target "_blank"} "Twitter"]]
-     [:li [:a {:rel "me" :href "https://social.ballpointcarrot.net/ballpointcarrot" :target "_blank"} "Mastodon"]]
+     [:li [:a {:rel "me" :href "https://social.ballpointcarrot.net/@ballpointcarrot" :target "_blank"} "Mastodon"]]
      [:li [:a {:rel "me" :href "https://github.com/ballpointcarrot" :target "_blank"} "Github"]]
-     [:li [:a {:rel "me" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]] ]]
+     [:li [:a {:rel "me" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]]]]
    [:div.inner
     [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]])
