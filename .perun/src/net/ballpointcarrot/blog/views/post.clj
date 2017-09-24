@@ -11,10 +11,10 @@
      [:header.post-header
       [:a.blog-logo {:href (:base-url meta)}
        [:span.blog-title (:site-title meta)]]]
-     [:article.post
+     [:article {:class "post h-entry"}
       (bpc/post-header current)
-      [:h1.post-title (:title current)]
-      [:section.post-content (:content current)]
+      [:h1.post-title.p-name (:title current)]
+      [:section.post-content.e-content (:content current)]
       [:footer.post-footer 
        [:section.author
         [:h4 (:author meta)]

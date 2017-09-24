@@ -26,10 +26,10 @@
 
 (defn post-header [post]
   [:span.post-meta
-   [:date {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
+   [:time.dt-published {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
    [:div.tags (for [tag (:tags post)]
-                [:a {:href (str "/tags/" tag ".html")
-                     :style "padding: 0 0.5rem 0 0;"} tag])]
+                [:a.p-category{:href (str "/tags/" tag ".html")
+                               :style "padding: 0 0.5rem 0 0;"} tag])]
    (if (:draft post)
      [:div.unpublished "DRAFT"])])
 
@@ -49,11 +49,12 @@
   [:footer.site-footer
    [:a {:class "subscribe icon-feed" :href (str (:base-url metadata) "atom.xml")}
     [:span.tooltip "Subscribe!"]]
-   [:div.inner
+   [:div.inner.h-card
+    [:div "I'm " [:span.p-name "Christopher Kruse"] "."]
     [:ul.web-identity
      [:li [:a {:rel "me" :href "https://twitter.com/ballpointcarrot" :target "_blank"} "Twitter"]]
      [:li [:a {:rel "me" :href "https://social.ballpointcarrot.net/@ballpointcarrot" :target "_blank"} "Mastodon"]]
      [:li [:a {:rel "me" :href "https://github.com/ballpointcarrot" :target "_blank"} "Github"]]
-     [:li [:a {:rel "me" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]]]]
+     [:li [:a {:class "u-email" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]]]]
    [:div.inner
     [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]])
