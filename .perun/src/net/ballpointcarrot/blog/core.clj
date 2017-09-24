@@ -26,7 +26,7 @@
 
 (defn post-header [post]
   [:span.post-meta
-   [:time.dt-published {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
+   [:time.dt-published {:datetime (date-string (:date-created post))} [:a {:href (:canonical-url post)}(date-string (:date-created post)) ]]
    [:div.tags (for [tag (:tags post)]
                 [:a.p-category{:href (str "/tags/" tag ".html")
                                :style "padding: 0 0.5rem 0 0;"} tag])]
