@@ -15,8 +15,7 @@
    ;; Styling links
    (include-css "/assets/css/screen.css"
                 "//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic%7COpen+Sans:700,400"
-                "/assets/css/prism.css")
-   ])
+                "/assets/css/prism.css")])
 
 (defn date-string [date]
   (if (nil? date)
@@ -30,8 +29,7 @@
    [:date {:datetime (date-string (:date-created post))} (date-string (:date-created post))]
    [:div.tags (for [tag (:tags post)]
                 [:a {:href (str "/tags/" tag ".html")
-                     :style "padding: 0 0.5rem 0 0;"} tag]
-                )]
+                     :style "padding: 0 0.5rem 0 0;"} tag])]
    (if (:draft post)
      [:div.unpublished "DRAFT"])])
 
@@ -52,5 +50,10 @@
    [:a {:class "subscribe icon-feed" :href (str (:base-url metadata) "atom.xml")}
     [:span.tooltip "Subscribe!"]]
    [:div.inner
-    [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]]
-  )
+    [:ul.web-identity
+     [:li [:a {:rel "me" :href "https://twitter.com/ballpointcarrot" :target "_blank"} "Twitter"]]
+     [:li [:a {:rel "me" :href "https://social.ballpointcarrot.net/ballpointcarrot" :target "_blank"} "Mastodon"]]
+     [:li [:a {:rel "me" :href "https://github.com/ballpointcarrot" :target "_blank"} "Github"]]
+     [:li [:a {:rel "me" :href "mailto:ckruse@ballpointcarrot.net" :target "_blank"} "email"]] ]]
+   [:div.inner
+    [:section.copyright "All content copyright " [:a {:href (:base-url metadata)} (:site-title metadata)] (str " &copy; " (.getYear (java.time.LocalDateTime/now)) " &bull; All rights reserved.")]]])
