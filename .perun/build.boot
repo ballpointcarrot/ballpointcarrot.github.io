@@ -6,12 +6,12 @@
                  [perun "0.4.2-SNAPSHOT"]
                  [enlive "1.1.6" :exclusions [org.clojure/clojure]]
                  [deraen/boot-sass "0.3.1"]
-                 [pandeiro/boot-http "0.8.3"]
+                 [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]
                  [org.martinklepsch/boot-gzip "0.1.3"]])
 
 (require '[clojure.string :as str]
-         '[io.perun :refer :all]
-         '[io.perun.core :as p]
+         '[io.perun :as p]
+         '[io.perun.core :as pc]
          '[io.perun.meta :as pm]
          '[deraen.boot-sass :refer [sass]]
          '[pandeiro.boot-http :refer [serve]])
@@ -57,41 +57,41 @@
   "Build the blog."
   []
   (comp
-   (global-metadata :filename "ballpointcarrot.net.edn")
-   (markdown
-     :md-exts {:smartypants true})
-   (word-count)
+   (p/global-metadata :filename "ballpointcarrot.net.edn")
+   (p/markdown
+    :md-exts {:smartypants true})
+   (p/word-count)
    (set-excerpts)
-   (render :renderer 'net.ballpointcarrot.blog.views.post/render-post
-           :filterer post?
-           :out-dir "public")))
+   (p/render :renderer 'net.ballpointcarrot.blog.views.post/render-post
+             :filterer post?
+             :out-dir "public")))
 
 (deftask build-collections
   "Build collection pages for the blog."
   []
   (comp
-   (collection :renderer 'net.ballpointcarrot.blog.views.index/render
-               :sortby :date-created
+   (p/collection :renderer 'net.ballpointcarrot.blog.views.index/render
+                 :sortby :date-created
+                 :filterer post?
+                 :page "index.html")
+   (p/collection :renderer 'net.ballpointcarrot.blog.views.archive/render
+                 :sortby :date-created
+                 :filterer post?
+                 :page "archive.html")
+   (p/collection :renderer 'net.ballpointcarrot.blog.views.tagindex/render
+                 :filterer post?
+                 :page "tags.html")
+   (p/tags :renderer 'net.ballpointcarrot.blog.views.tags/render
            :filterer post?
-               :page "index.html")
-   (collection :renderer 'net.ballpointcarrot.blog.views.archive/render
-               :sortby :date-created
-           :filterer post?
-               :page "archive.html")
-   (collection :renderer 'net.ballpointcarrot.blog.views.tagindex/render
-               :filterer post?
-               :page "tags.html")
-   (tags :renderer 'net.ballpointcarrot.blog.views.tags/render
-           :filterer post?
-         :out-dir "public/tags")))
+           :out-dir "public/tags")))
 
 (deftask publish
   "Build the production version of the blog for publishing on Github."
   []
   (comp
    (build-dev)
-   (draft)
-   (atom-feed :page-size 100)
+   (p/draft)
+   (p/atom-feed :page-size 100)
    (build-collections)
    (sift :include #{#"public/"}
          :move {#"public/" ""})
@@ -103,7 +103,7 @@
   (comp
    (watch)
    (build-dev)
-   (draft)
-   (atom-feed :page-size 100)
+   (p/draft)
+   (p/atom-feed :page-size 100)
    (build-collections)
    (serve :resource-root "public")))
